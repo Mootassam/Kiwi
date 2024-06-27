@@ -3,7 +3,7 @@ import Roles from "src/security/roles";
 const userEnumerators = {
   status: ["active", "empty-permissions"],
   genre: ["male", "female"],
-  wallet: ["USDT TRC20","ETH"],
+  wallet: ["Trc20","ETH"],
   roles: Object.keys(Roles.values),
 };
 
