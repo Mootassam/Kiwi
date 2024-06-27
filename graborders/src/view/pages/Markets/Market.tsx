@@ -152,8 +152,7 @@ function Market() {
 
           <div className="marquee">
             <span>
-            Our platform is open from 9 AM to midnight ET. Please complete your daily two sets of submissions and log a full working day with the Specialized Team during this time.
-            </span>
+            Our platform is open from 9 AM to midnight ET. Please ensure you complete your daily two sets of submissions and register for a full working day with the Specialized Team during this time.            </span>
           </div>
           <NewsTicker text="" />
         </div>
