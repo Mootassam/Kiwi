@@ -152,12 +152,7 @@ function Market() {
 
           <div className="marquee">
             <span>
-              Dear users, welcome to join us. The daily working hours are from
-              10:00 am to 23:00 pm Eastern. If you keep working for 4 days, you
-              will be paid 200$. If you keep working for 7 days, you can get
-              500$. If you keep working for 10 days, you will be paid 1,000 USD.
-              If you stay on the job for 20 days, you will be paid $2,500. If
-              you stay on the job for 30 days, you will be paid $3,500
+            Our platform is open from 9 AM to midnight ET. Please complete your daily two sets of submissions and log a full working day with the Specialized Team during this time.
             </span>
           </div>
           <NewsTicker text="" />
