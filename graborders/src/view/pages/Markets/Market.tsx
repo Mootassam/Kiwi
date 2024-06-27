@@ -17,7 +17,7 @@ function Market() {
   const record = useSelector(selector.selectRows);
   const logorecord = useSelector(selectors.selectRows);
   const loadingImage = useSelector(selectors?.selectLoading);
-const [timemodal, setBigModal] = useState(true)
+  const [timemodal, setBigModal] = useState(true);
   const loading = useSelector(selector.selectLoading);
   const [Modal, setShowModal] = useState(false);
   const currentUser = useSelector(authSelectors.selectCurrentUser);
@@ -38,7 +38,7 @@ const [timemodal, setBigModal] = useState(true)
     const currentDateTime = new Date().toLocaleString("en-US", options);
     return currentDateTime;
   };
-  
+
   const dolistCompany = () => {
     dispatch(listactions.doFetch());
   };
@@ -51,8 +51,6 @@ const [timemodal, setBigModal] = useState(true)
 
     // eslint-disable-next-line
   }, [dispatch]);
-
- 
 
   const hideModal = () => {
     setShowModal(false);
@@ -151,14 +149,18 @@ const [timemodal, setBigModal] = useState(true)
           <div>
             <i className="fa-solid fa-volume-off speaker"></i>
           </div>
-      
 
           <div className="marquee">
-          <span>Dear users, welcome to join us. The daily working hours are from 10:00 am to 23:00 pm Eastern. If you keep working for 4 days, you will be paid 200$. If you keep working for 7 days, you can get 500$. If you keep working for 10 days, you will be paid 1,000 USD. If you stay on the job for 20 days, you will be paid $2,500. If you stay on the job for 30 days, you will be paid $3,500</span>
-        </div>
-          <NewsTicker
-            text=""
-          />
+            <span>
+              Dear users, welcome to join us. The daily working hours are from
+              10:00 am to 23:00 pm Eastern. If you keep working for 4 days, you
+              will be paid 200$. If you keep working for 7 days, you can get
+              500$. If you keep working for 10 days, you will be paid 1,000 USD.
+              If you stay on the job for 20 days, you will be paid $2,500. If
+              you stay on the job for 30 days, you will be paid $3,500
+            </span>
+          </div>
+          <NewsTicker text="" />
         </div>
 
         <div className="advertise__buttons">
@@ -293,39 +295,40 @@ const [timemodal, setBigModal] = useState(true)
         </div>
       )}
 
-      {timemodal && <div className="big__modal">
-      <div className="modal__time">
-
-      {logorecord.map((item) => (
-            <>
-              <span className="modal__companyname">{item.name}</span>
-              {!loadingImage && item?.photo[0]?.downloadUrl && (
-                <img
-                  src={item?.photo[0]?.downloadUrl}
-                  alt=""
-                  style={{width:190}}
-                />
-              )}
-              {!loadingImage && !item?.photo[0]?.downloadUrl && (
-                <img
-                  src="/images/invitation/logo.png"
-                  alt=""
-                  className="invitation__"
-                />
-              )}
-            </>
-          ))}
-        <div className="time__">
-          Each time user completed a set of optimisation tasks, they can
-          immedialy approch the platform's customer serivice to receive a random
-          bonus
+      {timemodal && (
+        <div className="big__modal">
+          <div className="modal__time">
+            {logorecord.map((item) => (
+              <>
+                <span className="modal__companyname">{item.name}</span>
+                {!loadingImage && item?.photo[0]?.downloadUrl && (
+                  <img
+                    src={item?.photo[0]?.downloadUrl}
+                    alt=""
+                    style={{ width: 190 }}
+                  />
+                )}
+                {!loadingImage && !item?.photo[0]?.downloadUrl && (
+                  <img
+                    src="/images/invitation/logo.png"
+                    alt=""
+                    className="invitation__"
+                  />
+                )}
+              </>
+            ))}
+            <div className="time__">
+              Welcome to Click Consult! 🎉 We're thrilled to have you. Your work
+              on product submissions boosts merchants' visibility and SEO. Stay
+              motivated and get rewarded! For help, contact customer service via
+              live chat.{" "}
+            </div>
+            <div className="close" onClick={() => setBigModal(!timemodal)}>
+              <i className="fa fa-close closa" />
+            </div>
+          </div>
         </div>
-        <div className="close" onClick={() => setBigModal(!timemodal)}>
-          <i className="fa fa-close closa" />
-        </div>
-      </div>
-      </div> }
-
+      )}
     </div>
   );
 }
