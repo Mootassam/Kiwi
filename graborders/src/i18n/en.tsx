@@ -2623,7 +2623,6 @@ const en = {
     },
     enumerators: {
       status: {
-        Erc20: "Erc20",
         Trc20: "Trc20",
         ETH: "ETH",
       },
