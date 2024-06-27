@@ -23,8 +23,8 @@ function TransactionFormPage(props) {
     selectors.selectSaveLoading,
   );
   const record = useSelector(selectors.selectRecord);
-
   const isEditing = Boolean(match.params.id);
+  
   const title = isEditing
     ? i18n('entities.transaction.edit.title')
     : i18n('entities.transaction.new.title');
@@ -56,7 +56,6 @@ function TransactionFormPage(props) {
         <PageTitle>{title}</PageTitle>
 
         {initLoading && <Spinner />}
-
         {dispatched && !initLoading && (
           <CouponsForm
             saveLoading={saveLoading}

@@ -1038,8 +1038,7 @@ img {
 }
 
 .marquee span {
-  padding-left: 
-  500px;
+  padding-left: 500px;
   display: inline-block;
   animation: marquee 15s linear infinite;
 }
@@ -2357,13 +2356,12 @@ button:disabled {
   height: 100%;
 }
 
-.big__modal{ 
+.big__modal {
   background-color: rgba(5, 5, 5, 0.7);
   width: 100%;
   height: 100%;
-position: fixed;
-z-index: 100;
-
+  position: fixed;
+  z-index: 100;
 }
 
 .modal__time {
@@ -2379,7 +2377,7 @@ z-index: 100;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap:10px;
+  gap: 10px;
   padding: 25px 20px;
   border-radius: 5px;
 
@@ -2414,15 +2412,134 @@ z-index: 100;
   font-size: 20px;
   color: #b8ae94;
 }
-.modal__companyname{ 
+.modal__companyname {
   font-size: 18px;
   color: white;
   font-weight: bold;
 }
 
-.small__invitation{ 
+.small__invitation {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.profile__balances {
+  background-color: #0056b3;
+  width: 100%;
+  margin-top: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  gap: 8px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.app__deposit {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.deposit__balance {
+  display: flex;
+  justify-content: space-between;
+}
+.deposit__balance > div {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.deposit__title {
+  margin-top: 30px;
+}
+
+.deposit__ {
+  padding: 20px;
+  width: 100%;
+  margin-top: 15px;
+  border: 0px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.deposit__:focus {
+  outline: none;
+}
+.submit__button {
+  background-color: #0056b3;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+.usdt__ {
+  background-color: #0056b3;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.amount__deposit {
+  margin-top: 20px;
+}
+.amount__detaila {
+  margin-top: 20px;
+}
+
+.voucher__ {
+  margin-top: 30px;
+  width: 100%;
+  height: 300px;
+  border: 3px solid #fff;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0056b3;
+}
+
+.plus__size {
+  font-size: 35px;
+  color: white;
+}
+
+.uplaod__button {
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.input__wallet{ 
+  width: 100%;
+  padding: 10px;
+}
+
+.select__wallet {
+  margin-top: 10px;
 }

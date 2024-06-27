@@ -26,6 +26,7 @@ const privateRoutes = [
     permissionRequired: permissions.categoryRead,
     exact: true,
   },
+  
 
   {
     path: "/Online",
@@ -60,6 +61,13 @@ const screenRoutes = [
     exact: true,
   },
   {
+    path: "/Deposit",
+    loader: () => import("src/view/pages/Deposit/Deposit"),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+  
+  {
     path: "/faqs",
     loader: () => import("src/view/pages/Faqs/Faqs"),
     permissionRequired: permissions.categoryRead,
@@ -85,6 +93,7 @@ const screenRoutes = [
     permissionRequired: permissions.categoryRead,
     exact: true,
   },
+  
   {
     path: "/myprofile",
     loader: () => import("src/view/pages/Team/Team"),

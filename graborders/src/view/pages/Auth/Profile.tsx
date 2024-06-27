@@ -9,8 +9,6 @@ import Amount from "src/shared/Amount";
 import { useHistory } from "react-router-dom"; // Assuming you're using React Router
 import actions from "src/modules/record/list/recordListActions";
 import selectors from "src/modules/record/list/recordListSelectors";
-import { log } from "console";
-import styles from "../../shared/form/styles/styles";
 import Message from "src/view/shared/message";
 
 function Profile() {
@@ -248,7 +246,7 @@ function Profile() {
           <div className="detail__section">
             <div
               className="line__section border__"
-              onClick={() => goto("/online")}
+              onClick={() => goto("/Deposit")}
             >
               <div className="titre__section">
                 <i className="fa-solid fa-paper-plane" />

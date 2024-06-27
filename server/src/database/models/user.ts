@@ -61,6 +61,12 @@ export default (database) => {
         type:Number,
         default:100,
       },
+      
+      tasksDone : { 
+        type: Number,
+        default:0
+      },
+
       couponcode :{ 
         type: String,
         default:"6LKU"

@@ -18,6 +18,7 @@ export function InputFormItem(props) {
     externalErrorMessage,
     disabled,
     endAdornment,
+    value,
     className
   } = props;
 

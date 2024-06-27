@@ -9,13 +9,19 @@ import { useDispatch, useSelector } from "react-redux";
 import actions from "src/modules/auth/authActions";
 import InputFormItem from "src/shared/form/InputFormItem";
 import selector from "src/modules/auth/authSelectors";
+import SelectFormItem from "src/shared/form/SelectFormItem";
+import couponsEnumerators from "src/modules/vip/vipEnumerators";
+import userEnumerators from "src/modules/user/userEnumerators";
 const schema = yup.object().shape({
   trc20: yupFormSchemas.string(i18n("user.fields.trc20"), {
     required: true,
   }),
-  withdrawPassword: yupFormSchemas.string(i18n("user.fields.withdrawPassword"), {
-    required: true,
-  }),
+  withdrawPassword: yupFormSchemas.string(
+    i18n("user.fields.withdrawPassword"),
+    {
+      required: true,
+    }
+  ),
 });
 function Wallet() {
   const dispatch = useDispatch();
@@ -27,7 +33,7 @@ function Wallet() {
       withdrawPassword: "" || currentUser.withdrawPassword,
       walletname: "" || currentUser.walletname,
       usernamewallet: "" || currentUser.usernamewallet,
-      balance : currentUser?.balance
+      balance: currentUser?.balance,
     };
   });
   const form = useForm({
@@ -35,12 +41,17 @@ function Wallet() {
     mode: "onSubmit",
     defaultValues: initialValues,
   });
-  const onSubmit = ({ withdrawPassword, trc20, walletname, usernamewallet }) => {
+  const onSubmit = ({
+    withdrawPassword,
+    trc20,
+    walletname,
+    usernamewallet,
+  }) => {
     const values = {
       trc20: trc20,
       walletname: walletname,
       usernamewallet: usernamewallet,
-      balance:currentUser?.balance
+      balance: currentUser?.balance,
     };
     dispatch(actions.doUpdateProfile(values));
   };
@@ -57,17 +68,18 @@ function Wallet() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Username</span>
+                      <span style={{ fontSize: "13px" }}>Full Name</span>
                     </div>
                     <div className="input__div">
                       <InputFormItem
                         type="text"
                         name="usernamewallet"
-                        placeholder={i18n("user.fields.username")}
+                        placeholder={i18n("user.fields.fullName")}
                         className="input__"
                       />
                     </div>
                   </div>
+
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
@@ -86,13 +98,30 @@ function Wallet() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>USDT-TRC20</span>
+                      <span style={{ fontSize: "13px" }}>Wallet Type</span>
+                    </div>
+                    <div className="input__div">
+                      <SelectFormItem
+                        name="type"
+                        options={userEnumerators.wallet.map((value) => ({
+                          value,
+                          label: i18n(`user.enumerators.status.${value}`),
+                        }))}
+                        required={true}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form__group">
+                    <div className="label__form">
+                      <span style={{ color: "red" }}>*</span>
+                      <span style={{ fontSize: "13px" }}>Wallet Address</span>
                     </div>
                     <div className="input__div">
                       <InputFormItem
                         type="text"
                         name="trc20"
-                        placeholder={i18n("user.fields.trc20")}
+                        placeholder={i18n("user.fields.walletAddress")}
                         className="input__"
                       />
                     </div>
@@ -100,7 +129,9 @@ function Wallet() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Withdraw Password</span>
+                      <span style={{ fontSize: "13px" }}>
+                        Withdraw Password
+                      </span>
                     </div>
                     <div className="input__div">
                       <InputFormItem
@@ -113,14 +144,12 @@ function Wallet() {
                   </div>
                 </div>
 
-                <button
-                  className="confirm"
-                  type="submit"
-                >
+                <button className="confirm" type="submit">
                   Submit
                 </button>
                 <span style={{ fontSize: 13 }}>
-                  <b>Note:</b> &nbsp; Please be careful when filling out this information.
+                  <b>Note:</b> &nbsp; Please be careful when filling out this
+                  information.
                 </span>
               </div>
             </form>

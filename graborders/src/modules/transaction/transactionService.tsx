@@ -56,12 +56,11 @@ export default class TransactionService {
 
 
   static async create(data) {
+    
     const body = {
       data,
     };
-
     const tenantId = AuthCurrentTenant.get();
-
     const response = await authAxios.post(
       `/tenant/${tenantId}/transaction`,
       body,

@@ -208,6 +208,8 @@ const en = {
         name: 'Name',
         slug: 'Number',
         photo: 'Photo',
+        trc20:'TRC20',
+        eth:"ETH",
         metaKeywords: 'MetaKeywords',
         metaDescriptions: 'MetaDescriptions',
         status: 'Status',
@@ -2077,6 +2079,7 @@ const en = {
         updatedAt: 'Updated at',
         createdAtRange: 'Created at',
         datetransaction: 'Date transaction',
+        photo:"Photo",
       },
       enumerators: {
         status: {
@@ -2626,6 +2629,7 @@ const en = {
       currentrecord:"Tasks Done",
       freezeblance:"Freeze Balance",
       couponcode:"couponcode",
+      photo:'photo',
       id: 'Id',
       avatars: 'Avatar',
       email: 'Email',

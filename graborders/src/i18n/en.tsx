@@ -2554,6 +2554,7 @@ const en = {
     fields: {
       username: "Username",
       walletName: "wallet Name",
+      walletAddress:"Wallet Address",
       id: "Id",
       confirmPassword:"confirm Password",
       avatars: "Avatar",
@@ -2619,6 +2620,13 @@ const en = {
       invited: "Invited",
       "empty-permissions": "Waiting for Permissions",
       inactive: "Inactive",
+    },
+    enumerators: {
+      status: {
+        Erc20: "Erc20",
+        Trc20: "Trc20",
+        ETH: "ETH",
+      },
     },
     invite: "Invite",
     validations: {

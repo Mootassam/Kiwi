@@ -53,18 +53,14 @@ const transactionFormActions = {
       dispatch({
         type: transactionFormActions.CREATE_STARTED,
       });
-
       await TransactionService.create(values);
-
       dispatch({
         type: transactionFormActions.CREATE_SUCCESS,
       });
-
       Message.success(
         i18n('entities.transaction.create.success'),
       );
-
-      getHistory().push('/withdraw ');
+      getHistory().push('/profile');
     } catch (error) {
       Errors.handle(error);
 

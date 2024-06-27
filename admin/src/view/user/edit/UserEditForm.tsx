@@ -11,23 +11,16 @@ import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import userEnumerators from 'src/modules/user/userEnumerators';
 import { yupResolver } from '@hookform/resolvers/yup';
-import userSecteur from 'src/modules/user/userSecteur';
-import userEtat from 'src/modules/user/userEtat';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import moment from 'moment';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import CouponsAutocompleteFormItem from 'src/coupons/autocomplete/CouponsAutocompleteFormItem';
 import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
 import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
 import Storage from 'src/security/storage';
-import FilesFormItem from 'src/view/shared/form/items/FilesFormItem';
 import VipAutocompleteFormItem from 'src/view/vip/autocomplete/VipAutocompleteFormItem';
 import ProductAutocompleteFormItem from 'src/view/product/autocomplete/ProductAutocompleteFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
-import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
-import { min } from 'lodash';
+
 
 const schema = yup.object().shape({
   roles: yupFormSchemas.stringArray(
@@ -79,7 +72,7 @@ function UserEditForm(props) {
   // const [initialValues] = useState(() => props.user || {});
   const [initialValues] = useState(() => {
     const record = props.user || {};
-
+    
     return {
       roles: record.roles[0],
       phoneNumber: record.phoneNumber,
@@ -99,7 +92,8 @@ function UserEditForm(props) {
       itemNumber: record.itemNumber,
       grab: record.grab,
       withdraw: record.withdraw,
-      freezeblance : record.freezeblance,
+      freezeblance: record.freezeblance,
+      tasksDone: record.tasksDone,
     };
   });
 
@@ -244,7 +238,6 @@ function UserEditForm(props) {
             </Col>
           </Row>
 
-          
           <Row>
             <Col sm={4}>
               <VipAutocompleteFormItem
