@@ -41,8 +41,6 @@ function ImagesFormItem(props) {
         </label>
       )}
       
-      <br />
-
       <ImagesUploader
         storage={storage}
         value={watch(name)}

@@ -56,6 +56,7 @@ export function InputFormItem(props) {
           </label>
         )}
         {description}
+        <br />
         <input
          className={`${props.className} ${
           errorMessage ? '__danger' : ''

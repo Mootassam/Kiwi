@@ -2563,7 +2563,7 @@ const en = {
       emails: "Email(s)",
       erc20: "ERC20 wallet address ",
       trc20: "TRC20 wallet address",
-      fullName: "Name",
+      fullName: "Full Name",
       balance: "Balance",
       firstName: "First Name",
       lastName: "Last Name",
@@ -2623,7 +2623,7 @@ const en = {
     },
     enumerators: {
       status: {
-        Trc20: "Trc20",
+        Trc20: "USDT TRC20",
         ETH: "ETH",
       },
     },

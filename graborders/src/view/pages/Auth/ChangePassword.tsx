@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React, { useState } from "react";
 import SubHeader from "src/view/shared/Header/SubHeader";
 import yupFormSchemas from "src/modules/shared/yup/yupFormSchemas";
 import * as yup from "yup";
@@ -6,7 +6,7 @@ import { i18n } from "../../../i18n";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
-import actions from 'src/modules/auth/authActions';
+import actions from "src/modules/auth/authActions";
 import InputFormItem from "src/shared/form/InputFormItem";
 import selectors from "src/modules/auth/authSelectors";
 import ButtonIcon from "src/shared/ButtonIcon";
@@ -67,8 +67,8 @@ function ChangePassword() {
                         type="password"
                         name="oldPassword"
                         autoComplete="old-password"
-                        
-                        className="input__"
+                        className="input__withdraw"
+                        placeholder={"Old Password"}
                       />
                     </div>
                   </div>
@@ -78,12 +78,12 @@ function ChangePassword() {
                       <span style={{ fontSize: "13px" }}>New Password</span>
                     </div>
                     <div className="input__div">
-                     
                       <InputFormItem
                         type="password"
                         name="newPassword"
-                        autoComplete="new-password" 
-                        className="input__"
+                        autoComplete="new-password"
+                        className="input__withdraw"
+                        placeholder={"New Password"}
                       />
                     </div>
                   </div>
@@ -97,19 +97,26 @@ function ChangePassword() {
                         type="password"
                         name="newPasswordConfirmation"
                         autoComplete="new-password"
-                        className="input__"
+                        className="input__withdraw"
+                        placeholder={"New Password Confirmation"}
                       />
                     </div>
                   </div>
                 </div>
 
-                <button className="confirm" 
-                     disabled={saveLoading}
-              type="button"
-              onClick={form.handleSubmit(onSubmit)}> <ButtonIcon
-              loading={saveLoading}
-              iconClass="far fa-save"
-            /> &nbsp;Submit</button>
+                <button
+                  className="confirm"
+                  disabled={saveLoading}
+                  type="button"
+                  onClick={form.handleSubmit(onSubmit)}
+                >
+                  {" "}
+                  <ButtonIcon
+                    loading={saveLoading}
+                    iconClass="far fa-save"
+                  />{" "}
+                  &nbsp;Submit
+                </button>
                 <span style={{ fontSize: 13 }}>
                   <b>Note:</b> &nbsp; Please fill out this information carefully
                 </span>

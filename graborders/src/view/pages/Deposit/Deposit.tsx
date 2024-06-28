@@ -76,14 +76,14 @@ function Deposit() {
       {!show ? (
         <div>
           <SubHeader title="Deposit" path="/" />
-          <div className="app__deposit">
+          <div className="app__deposit wallet__form">
             <div className="profile__balances">
-              <span>Total Balance</span>
-              <span>USDT {currentUser?.balance}</span>
+              <span className="total__deposit">Total Balance:</span>
+              <span className="balance__">USDT {currentUser?.balance}</span>
             </div>
 
             <div className="deposit__title">
-              <span>Deposit Amount </span>
+              <span className="deposit__text">Deposit Amount </span>
             </div>
 
             <div className="deposit__balance">
@@ -108,14 +108,14 @@ function Deposit() {
                   name=""
                   id=""
                   placeholder="deposit Amount"
-                  className="deposit__"
+                  className="input__withdraw"
                   onChange={(e) => setBalance(e.target.value)}
                   value={balance}
                 />
               </div>
             </div>
 
-            <div className="submit__button" onClick={() => setShow(true)}>
+            <div className="confirm" onClick={() => setShow(true)}>
               Submit
             </div>
           </div>
@@ -128,8 +128,10 @@ function Deposit() {
             {record && (
               <FormProvider {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                  <div>
+                  <div className="wallet__form">
                     <div className="select__wallet">
+                    <div className="deposit__text">Deposit Amount</div>
+
                       <select
                         name="wallet"
                         id=""
@@ -156,18 +158,18 @@ function Deposit() {
                     </div>
 
                     <div className="amount__deposit">
-                      <div>Deposit Amount</div>
+                      <div className="deposit__text">Deposit Amount</div>
                       <div className="deposit__Form">
                         <input
                           type="text"
                           name=""
                           id=""
                           placeholder="deposit Amount"
-                          className="deposit__"
+                          className="input__withdraw"
                           value={balance}
                           disabled={true}
                         />
-                      </div>{" "}
+                      </div>
                     </div>
 
                     {/* <div className="col-lg-7 col-md-8 col-12">
@@ -178,10 +180,10 @@ function Deposit() {
                       />
                     </div> */}
                     <div className="amount__deposit">
-                      <div>Payment Voucher</div>
+                      <div className="deposit__text">Payment Voucher</div>
                       <div className="amount__detaila">
-                        Please Provide a screenshot of the receipt wich is
-                        showing "Completed" or "Sucess"
+                        Please Provide a screenshot of the receipt which is
+                        showing "Completed" or "Success"
                       </div>
                       <ImagesFormItem
                         name="photo"
@@ -191,7 +193,7 @@ function Deposit() {
                     </div>
 
                     <button
-                      className="btn btn-primary"
+                      className="confirm"
                       type="submit"
                       onClick={form.handleSubmit(onSubmit)}
                     >

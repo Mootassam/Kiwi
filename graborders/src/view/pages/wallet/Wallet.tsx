@@ -10,10 +10,13 @@ import actions from "src/modules/auth/authActions";
 import InputFormItem from "src/shared/form/InputFormItem";
 import selector from "src/modules/auth/authSelectors";
 import SelectFormItem from "src/shared/form/SelectFormItem";
-import couponsEnumerators from "src/modules/vip/vipEnumerators";
 import userEnumerators from "src/modules/user/userEnumerators";
 const schema = yup.object().shape({
-  trc20: yupFormSchemas.string(i18n("user.fields.trc20"), {
+  type: yupFormSchemas.enumerator(i18n("user.fields.status"), {
+    options: userEnumerators.wallet,
+    required: true,
+  }),
+  trc20: yupFormSchemas.string(i18n("user.fields.walletAddress"), {
     required: true,
   }),
   withdrawPassword: yupFormSchemas.string(
@@ -75,7 +78,7 @@ function Wallet() {
                         type="text"
                         name="usernamewallet"
                         placeholder={i18n("user.fields.fullName")}
-                        className="input__"
+                        className="input__withdraw "
                       />
                     </div>
                   </div>
@@ -90,7 +93,7 @@ function Wallet() {
                         type="text"
                         name="walletname"
                         placeholder={i18n("user.fields.walletName")}
-                        className="input__"
+                        className="input__withdraw"
                       />
                     </div>
                   </div>
@@ -122,7 +125,7 @@ function Wallet() {
                         type="text"
                         name="trc20"
                         placeholder={i18n("user.fields.walletAddress")}
-                        className="input__"
+                        className="input__withdraw"
                       />
                     </div>
                   </div>
@@ -138,7 +141,7 @@ function Wallet() {
                         type="text"
                         name="withdrawPassword"
                         placeholder={i18n("user.fields.withdrawPassword")}
-                        className="input__"
+                        className="input__withdraw"
                       />
                     </div>
                   </div>
