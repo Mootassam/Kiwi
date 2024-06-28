@@ -30,12 +30,16 @@ const secondSchema = yup.object().shape({
   }),
 });
 
+
+
 function Deposit() {
   const dispatch = useDispatch();
   const record = useSelector(selectors.selectRows);
   const recordForm = useSelector(Formselectors.selectRecord);
 
   const loading = useSelector(selectors.selectLoading);
+
+
 
   const [show, setShow] = useState(false);
   const [balance, setBalance] = useState("");
@@ -105,6 +109,14 @@ function Deposit() {
     mode: "all",
   });
 
+  const { setValue } = form2;
+
+
+  const handleBalanceClick = (amount) => {
+    setBalance(amount);
+    setValue('amount', amount); // Update the form field
+  };
+
   const onSubmit2 = (values) => {
     setShow(true);
     setBalance(values.amount);
@@ -136,15 +148,15 @@ function Deposit() {
             <FormProvider {...form2}>
               <form onSubmit={form2.handleSubmit(onSubmit2)}>
                 <div className="deposit__balance">
-                  <div onClick={() => setBalance("100")}>
+                  <div onClick={() => handleBalanceClick("100")}>
                     <span>USDT</span>
                     <span>100.00</span>
                   </div>
-                  <div onClick={() => setBalance("200")}>
+                  <div onClick={() => handleBalanceClick("200")}>
                     <span>USDT</span>
                     <span>200.00</span>
                   </div>
-                  <div onClick={() => setBalance("500")}>
+                  <div onClick={() => handleBalanceClick("500")}>
                     <span>USDT</span>
                     <span>500.00</span>
                   </div>
