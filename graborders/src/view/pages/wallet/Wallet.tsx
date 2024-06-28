@@ -101,7 +101,7 @@ function Wallet() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Wallet Type</span>
+                      <span style={{ fontSize: "13px" }}>Choose preferred coin:</span>
                     </div>
                     <div className="input__div">
                       <SelectFormItem
