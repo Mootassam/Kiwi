@@ -2444,13 +2444,14 @@ button:disabled {
 }
 
 .deposit__balance {
-  display: flex;
-  justify-content: space-between;
+ display: grid;
+ grid-template-columns: repeat(3 , 1fr);
+ gap:15px
 }
 .deposit__balance > div {
   display: flex;
+  padding: 25px 0;
   flex-direction: column;
-  padding: 30px 30px;
   align-items: center;
   justify-content: center;
   gap: 10px;
