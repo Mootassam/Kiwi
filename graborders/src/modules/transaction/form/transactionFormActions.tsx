@@ -60,7 +60,8 @@ const transactionFormActions = {
       Message.success(
         i18n('entities.transaction.create.success'),
       );
-      getHistory().push('/profile');
+      getHistory().push('/transacation');
+      location.reload()
     } catch (error) {
       Errors.handle(error);
 
