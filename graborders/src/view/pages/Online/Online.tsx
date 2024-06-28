@@ -21,8 +21,7 @@ function Online() {
       </div>
 
       <div className="online__header">
-        if you have any questions or encounter issues, please email us or chat
-        with our online customer support team.
+      For general inquiries and assistance, please reach out to us via live chat. To register your full working day for salary purposes, contact the Specialized Team only.
       </div>
 
       <div className="contact__list">
