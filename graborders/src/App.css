@@ -2569,3 +2569,9 @@ margin-bottom: 10px;
 .balance__{ 
   font-weight: bold;
 }
+
+.usdt__copy{ 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SubHeader from "src/view/shared/Header/SubHeader";
 import { useDispatch, useSelector } from "react-redux";
 import authSelectors from "src/modules/auth/authSelectors";
@@ -7,7 +7,6 @@ import actions from "src/modules/company/list/companyListActions";
 import LoadingModal from "src/shared/LoadingModal";
 import * as yup from "yup";
 import yupFormSchemas from "src/modules/shared/yup/yupFormSchemas";
-import transactionEnumerators from "src/modules/transaction/transactionEnumerators";
 import { i18n } from "../../../i18n";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,9 +16,16 @@ import ImagesFormItem from "src/shared/form/ImagesFormItems";
 import Formselectors from "src/modules/transaction/form/transactionFormSelectors";
 import ButtonIcon from "src/view/shared/ButtonIcon";
 import Transactionactions from "src/modules/transaction/form/transactionFormActions";
+import Message from "src/shared/message";
 
 const schema = yup.object().shape({
   photo: yupFormSchemas.images(i18n("entities.product.fields.photo"), {
+    required: true,
+  }),
+});
+
+const secondSchema = yup.object().shape({
+  amount: yupFormSchemas.string(i18n("entities.transaction.fields.amount"), {
     required: true,
   }),
 });
@@ -38,6 +44,36 @@ function Deposit() {
 
   const handleChange = (e) => {
     setWallet(e.target.value);
+  };
+
+  const referenceCodeRef = useRef<any>(null);
+  const copyToClipboard = () => {
+    const referenceCode = referenceCodeRef.current.innerText;
+
+    // Check if the browser supports the modern clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(referenceCode)
+        .then(() => {
+          Message.success("Copied");
+
+          // You can add any additional logic here, such as showing a success message
+        })
+        .catch((error) => {
+          console.error("Error copying to clipboard:", error);
+          // You can handle errors here, such as displaying an error message to the user
+        });
+    } else {
+      // Fallback for browsers that do not support the modern clipboard API
+      const textArea = document.createElement("textarea");
+      textArea.value = referenceCode;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      Message.success("Copied");
+      // You can add any additional logic here for the fallback mechanism
+    }
   };
 
   const doFetch = async () => {
@@ -64,6 +100,16 @@ function Deposit() {
     mode: "all",
   });
 
+  const form2 = useForm({
+    resolver: yupResolver(secondSchema),
+    mode: "all",
+  });
+
+  const onSubmit2 = (values) => {
+    setShow(true);
+    setBalance(values.amount);
+  };
+
   const onSubmit = (values) => {
     values.amount = balance;
     values.user = currentUser;
@@ -79,45 +125,50 @@ function Deposit() {
           <div className="app__deposit wallet__form">
             <div className="profile__balances">
               <span className="total__deposit">Total Balance:</span>
-              <span className="balance__">USDT {currentUser?.balance}</span>
+              <span className="balance__">
+                USDT {currentUser?.balance?.toFixed(2)}
+              </span>
             </div>
 
             <div className="deposit__title">
               <span className="deposit__text">Deposit Amount </span>
             </div>
+            <FormProvider {...form2}>
+              <form onSubmit={form2.handleSubmit(onSubmit2)}>
+                <div className="deposit__balance">
+                  <div onClick={() => setBalance("100")}>
+                    <span>USDT</span>
+                    <span>100.00</span>
+                  </div>
+                  <div onClick={() => setBalance("200")}>
+                    <span>USDT</span>
+                    <span>200.00</span>
+                  </div>
+                  <div onClick={() => setBalance("500")}>
+                    <span>USDT</span>
+                    <span>500.00</span>
+                  </div>
+                </div>
 
-            <div className="deposit__balance">
-              <div onClick={() => setBalance("100")}>
-                <span>USDT</span>
-                <span>100.00</span>
-              </div>
-              <div onClick={() => setBalance("200")}>
-                <span>USDT</span>
-                <span>200.00</span>
-              </div>
-              <div onClick={() => setBalance("500")}>
-                <span>USDT</span>
-                <span>500.00</span>
-              </div>
-            </div>
+                <div className="deposit__Form">
+                  <div>
+                    <InputFormItem
+                      type="text"
+                      name="amount"
+                      placeholder={i18n("entities.transaction.fields.amount")}
+                      className="input__withdraw"
+                    />
+                  </div>
+                </div>
 
-            <div className="deposit__Form">
-              <div>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="deposit Amount"
-                  className="input__withdraw"
-                  onChange={(e) => setBalance(e.target.value)}
-                  value={balance}
-                />
-              </div>
-            </div>
-
-            <div className="confirm" onClick={() => setShow(true)}>
-              Submit
-            </div>
+                <div
+                  className="confirm"
+                  onClick={form2.handleSubmit(onSubmit2)}
+                >
+                  Submit
+                </div>
+              </form>
+            </FormProvider>
           </div>
         </div>
       ) : (
@@ -130,7 +181,7 @@ function Deposit() {
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="wallet__form">
                     <div className="select__wallet">
-                    <div className="deposit__text">Deposit Amount</div>
+                      <div className="deposit__text">Choose preferred coin</div>
 
                       <select
                         name="wallet"
@@ -139,7 +190,7 @@ function Deposit() {
                         value={wallet}
                         onChange={handleChange}
                       >
-                        <option value="USDT">USDT TRC20</option>
+                        <option value="USDT">USDT (TRC20)</option>
                         <option value="ETH">ETH</option>
                       </select>
                     </div>
@@ -147,12 +198,28 @@ function Deposit() {
                       {wallet === "USDT" ? (
                         <div className="usdt__">
                           <div>TRC20 Address:</div>
-                          <div>{record[0]?.trc20}</div>
+                          <div className="usdt__copy">
+                            <div ref={referenceCodeRef}>{record[0]?.trc20}</div>
+                            <div>
+                              <i
+                                className="fa fa-copy"
+                                onClick={() => copyToClipboard()}
+                              ></i>
+                            </div>
+                          </div>
                         </div>
                       ) : (
                         <div className="usdt__">
                           <div>ETH Address:</div>
-                          <div>{record[0]?.eth}</div>
+                          <div className="usdt__copy">
+                            <div ref={referenceCodeRef}>{record[0]?.eth}</div>
+                            <div>
+                              <i
+                                className="fa fa-copy"
+                                onClick={() => copyToClipboard()}
+                              ></i>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -164,7 +231,7 @@ function Deposit() {
                           type="text"
                           name=""
                           id=""
-                          placeholder="deposit Amount"
+                          placeholder="Deposit Amount"
                           className="input__withdraw"
                           value={balance}
                           disabled={true}
@@ -182,7 +249,7 @@ function Deposit() {
                     <div className="amount__deposit">
                       <div className="deposit__text">Payment Voucher</div>
                       <div className="amount__detaila">
-                        Please Provide a screenshot of the receipt which is
+                        Please provide a screenshot of the receipt which is
                         showing "Completed" or "Success"
                       </div>
                       <ImagesFormItem

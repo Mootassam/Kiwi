@@ -44,7 +44,7 @@ const transactionFormActions = {
         type: transactionFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/withdraw ');
+      getHistory().push('/transacation');
     }
   },
 
