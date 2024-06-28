@@ -17,6 +17,7 @@ import Formselectors from "src/modules/transaction/form/transactionFormSelectors
 import ButtonIcon from "src/view/shared/ButtonIcon";
 import Transactionactions from "src/modules/transaction/form/transactionFormActions";
 import Message from "src/shared/message";
+import Transactionselectors from 'src/modules/transaction/form/transactionFormSelectors';
 
 const schema = yup.object().shape({
   photo: yupFormSchemas.images(i18n("entities.product.fields.photo"), {
@@ -36,15 +37,15 @@ function Deposit() {
   const dispatch = useDispatch();
   const record = useSelector(selectors.selectRows);
   const recordForm = useSelector(Formselectors.selectRecord);
-
   const loading = useSelector(selectors.selectLoading);
-
-
-
   const [show, setShow] = useState(false);
   const [balance, setBalance] = useState("");
   const currentUser = useSelector(authSelectors.selectCurrentUser);
   const [wallet, setWallet] = useState("USDT");
+
+  const saveLoading = useSelector(
+    Transactionselectors.selectSaveLoading,
+  );
 
   const handleChange = (e) => {
     setWallet(e.target.value);
@@ -277,7 +278,7 @@ function Deposit() {
                       onClick={form.handleSubmit(onSubmit)}
                     >
                       <ButtonIcon
-                        // loading={props.saveLoading}
+                        loading={saveLoading}
                         iconClass="far fa-save"
                       />
                       &nbsp;
