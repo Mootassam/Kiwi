@@ -8,7 +8,7 @@ import LoadingModal from "src/shared/LoadingModal";
 import Nodata from "src/view/shared/Nodata";
 
 function Transaction() {
-  const [active, setActive] = useState("withdraw");
+  const [active, setActive] = useState("deposit");
   const dispatch = useDispatch();
  const loading = useSelector(selector.selectLoading)
  const selectHasRows = useSelector(selector.selectHasRows)
