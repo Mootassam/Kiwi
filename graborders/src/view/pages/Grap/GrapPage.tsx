@@ -41,37 +41,13 @@ const Grappage = () => {
 
   const error = useSelector(recordSelector.selectError);
 
-  const refreshItems = useCallback(() => {
-    dispatch(recordListAction.doFetch());
-    dispatch(actions.doFetch());
-    dispatch(authActions.doRefreshCurrentUser());
+  const refreshItems = useCallback(async () => {
+    await dispatch(actions.doFetch());
+   await dispatch(recordListAction.doFetch());
+   await dispatch(authActions.doRefreshCurrentUser());
+
   }, [dispatch]);
 
-  const roll = useCallback(async (reel, offset = 0) => {
-    const delta =
-      (offset + 2) * numIcons + Math.round(Math.random() * numIcons);
-
-    const style = getComputedStyle(reel);
-    const backgroundPositionY = parseFloat(style["background-position-y"]);
-    const targetBackgroundPositionY = backgroundPositionY + delta * iconHeight;
-    const normTargetBackgroundPositionY =
-      targetBackgroundPositionY % (numIcons * iconHeight);
-
-    reel.style.transition = `background-position-y ${
-      (8 + 1 * delta) * timePerIcons
-    }ms cubic-bezier(.41,-0.01,.63,1.09)`;
-    reel.style.backgroundPositionY = `${
-      backgroundPositionY + delta * iconHeight
-    }px`;
-
-    await new Promise((resolve) =>
-      setTimeout(resolve, (8 + 1 * delta) * timePerIcons + offset * 150)
-    );
-
-    reel.style.transition = `none`;
-    reel.style.backgroundPositionY = `${normTargetBackgroundPositionY}px`;
-    return delta % numIcons;
-  }, []);
 
   const displayRandomImage = () => {
     // Function to update the image source
@@ -200,8 +176,9 @@ const Grappage = () => {
       user: currentUser.id,
     };
     dispatch(recordActions.doCreate(values));
-    await refreshItems();
     setShowModal(false);
+
+    await refreshItems();
   };
 
   const goto = (param) => {
@@ -313,7 +290,7 @@ const Grappage = () => {
             </div>
             <div className="group__comission">
               <div className="comission__text">Orders Completed</div>
-              <div className="comission__value"> {selectCountRecord}</div>
+              <div className="comission__value"> {currentUser?.tasksDone}</div>
             </div>
             <div className="group__comission">
               <div className="comission__text">Total Orders</div>

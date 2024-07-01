@@ -54,6 +54,7 @@ export default (database) => {
         type: Number,
         default: 0,
       },
+      
       parentcode: {
         type: String,
       },

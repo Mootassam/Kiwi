@@ -9,17 +9,21 @@ import Error405 from "../../errors/Error405";
 import Dates from "../utils/Dates";
 import Product from "../models/product";
 import UserRepository from "./userRepository";
-import product from "../models/product";
+import User from "../models/user";
+
 
 class RecordRepository {
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     const currentUser = MongooseRepository.getCurrentUser(options);
-
     await this.checkOrder(options);
-
     await this.calculeGrap(data, options);
+    await User(options.database).updateOne(
+      { _id: currentUser.id }, 
+      { $set: { tasksDone: currentUser.tasksDone + 1 } }
+    );
+
 
     const [record] = await Records(options.database).create(
       [
@@ -159,13 +163,13 @@ class RecordRepository {
     const dailyOrder = currentUser.vip.dailyorder;
 
     if (currentUser && currentUser.vip && currentUser.vip.id) {
-      if (record >= dailyOrder) {
+      if (currentUser.tasksDone >= dailyOrder) {
         throw new Error405(
-          "This is your limit. Please contact customer support for more tasks."
+          "This is your limit. Please contact customer support for more tasks"
         );
       }
 
-      if (currentUser.balance < 0) {
+      if (currentUser.balance <= 0 ) {
         throw new Error405("insufficient balance please upgrade.");
       }
     } else {
@@ -441,6 +445,13 @@ class RecordRepository {
       user: currentUser.id,
     });
 
+
+    criteriaAnd.push({
+      status: {
+        $regex: MongooseQueryUtils.escapeRegExp("completed"),
+        $options: "i",
+      },
+    });
 
     const start = new Date();
     start.setHours(0, 0, 0, 0); // Set to the start of the current day
