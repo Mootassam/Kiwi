@@ -22,7 +22,6 @@ function Online() {
 
       <div className="online__header">
       For general inquiries and assistance, please reach out to us via live chat. To register your full working day for salary calculation after successfully completing your daily tasks (two sets), contact the Specialized Team only.      </div>
-
       <div className="contact__list">
         {loading && <LoadingModal />}
         {!loading &&

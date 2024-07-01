@@ -152,12 +152,15 @@ function Market() {
 
           <div className="marquee">
             <span>
-            Our platform is open from 9 AM to midnight ET. Please ensure you complete your daily two sets of submissions and register for a full working day with the Specialized Team during this time.            </span>
+              Our platform is open from 9 AM to midnight ET. Please ensure you
+              complete your daily two sets of submissions and register for a
+              full working day with the Specialized Team during this time.{" "}
+            </span>
           </div>
           <NewsTicker text="" />
         </div>
 
-        <div className="advertise__buttons">
+        {/* <div className="advertise__buttons">
           <Link
             to="/online"
             className="button__deposit"
@@ -173,7 +176,7 @@ function Market() {
             {" "}
             Withdraw
           </Link>
-        </div>
+        </div> */}
         <div className="adverstise__actions">
           {button__action.map((item) => (
             <Link to={item.link} className="remove__ligne">
@@ -214,29 +217,29 @@ function Market() {
                       />
                     </div>
                     <div className="vip__text">
-                      <div className="vip__title">{item.title}</div>
+                      <div className="vip__title">{item?.title}</div>
+                      <div className="vip__price">USDT {item?.levellimit}</div>
                       <div className="vip__details">
-                        <div className="vip__description">
-                          <div className="description__key">Entry Limit:</div>
-                          <div className="description__value">
-                            {item.levellimit}
-                          </div>
+                        <div>
+                          <strong>● </strong>
+                          {item.comisionrate}% commission per data
                         </div>
-
-                        <div className="vip__description">
-                          <div className="description__key">Daily order:</div>
-                          <div className="description__value">
-                            {item.dailyorder}
-                          </div>
+                        <div>
+                          <strong>● </strong>
+                          {item.commissionmergedata}% commission for merge data
                         </div>
-                        <div className="vip__description">
-                          <div className="description__key">
-                            Comimsion rate:
-                          </div>
-                          <div className="description__value">
-                            {" "}
-                            {item.comisionrate}
-                          </div>
+                        <div>
+                          <strong>● </strong>
+                          Limited to {item.tasksperday} data per set,{" "}
+                          {item?.setperday} sets of data everyday
+                        </div>
+                        <div>
+                          <strong>● </strong>
+                          {item?.withdrawperday} times of withdrawal
+                        </div>
+                        <div>
+                          <strong>● </strong>
+                          {item?.handlingfee}% handling fee
                         </div>
                       </div>
                     </div>

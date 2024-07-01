@@ -12,6 +12,7 @@ import Spinner from 'src/view/shared/Spinner';
 import PageTitle from 'src/view/shared/styles/PageTitle';
 
 function TransactionFormPage(props) {
+  
   const [dispatched, setDispatched] = useState(false);
   const dispatch = useDispatch();
   const match = useRouteMatch();

@@ -366,6 +366,10 @@ td {
   font-size: 20px;
 }
 
+.content__header { 
+  margin-top: 10px;
+}
+
 .adverstise__actions {
   align-items: center;
   text-align: center;
@@ -376,6 +380,7 @@ td {
   justify-content: space-between;
   gap: 10px;
   border-radius: 10px;
+  background-color: white;
 }
 
 .button__action {
@@ -432,11 +437,10 @@ td {
 }
 
 .vip__image {
-  width: 50%;
   border-radius: 10px;
 }
 .vip__level {
-  height: 100px !important;
+  height: 60px !important;
 }
 
 .content__footer {
@@ -501,9 +505,23 @@ td {
 
 .vip__title {
   font-size: large;
-  color: #000;
-  font-weight: bold;
-  margin-bottom: 10px;
+  color: brown;
+  margin-bottom: 3px;
+}
+.vip__price {
+  color: rgb(0, 20, 96);
+  line-height: 1.2; 
+   font-weight: 500;
+}
+
+.vip__details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  color: #818181;
+  margin-top: 5px;
+  /* padding-left: 10px; */
 }
 
 .header_order {
@@ -708,7 +726,7 @@ td {
 }
 
 .vip__title {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
 }
 
@@ -2019,19 +2037,18 @@ button:disabled {
 
 .loading__page {
   position: fixed; /* Use fixed to keep it centered even if you scroll */
-  top: 50%;        /* Move to the center vertically */
-  left: 50%;  
+  top: 50%; /* Move to the center vertically */
+  left: 50%;
   transform: translate(-50%, -50%); /* Center it properly */
 
-  padding: 25px 90px;     /* Move to the center horizontally */
-  z-index: 100;    /* Keep it above other content */
+  padding: 25px 90px; /* Move to the center horizontally */
+  z-index: 100; /* Keep it above other content */
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgba(31, 30, 30, 0.45);
   border-radius: 4px;
 }
-
 
 .title__laoding {
   color: #000 !important;
@@ -2368,8 +2385,8 @@ button:disabled {
 
 .modal__time {
   position: fixed; /* Use fixed to keep it centered even if you scroll */
-  top: 50%;        /* Move to the center vertically */
-  left: 50%;  
+  top: 50%; /* Move to the center vertically */
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
   display: flex;
@@ -2444,9 +2461,9 @@ button:disabled {
 }
 
 .deposit__balance {
- display: grid;
- grid-template-columns: repeat(3 , 1fr);
- gap:15px
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
 }
 .deposit__balance > div {
   display: flex;
@@ -2462,11 +2479,10 @@ button:disabled {
   font-weight: bold;
 }
 
-.deposit__balance > div:hover { 
+.deposit__balance > div:hover {
   background-color: #0056b3;
   border: 1px solid #fff;
   color: white;
-
 }
 
 .deposit__title {
@@ -2542,7 +2558,7 @@ button:disabled {
   border-radius: 10px;
 }
 
-.input__wallet{ 
+.input__wallet {
   width: 100%;
   padding: 10px;
 }
@@ -2551,24 +2567,24 @@ button:disabled {
   margin-top: 10px;
 }
 
-.deposit__text { 
-font-weight: bold;
-margin-bottom: 10px;
+.deposit__text {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.content__deposit { 
+.content__deposit {
   background-color: #fff;
   padding: 12px;
 }
 
-.total__deposit { 
+.total__deposit {
   font-size: 20px;
 }
-.balance__{ 
+.balance__ {
   font-weight: bold;
 }
 
-.usdt__copy{ 
+.usdt__copy {
   display: flex;
   align-items: center;
   justify-content: space-between;
