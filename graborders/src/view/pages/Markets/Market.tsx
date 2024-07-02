@@ -230,10 +230,10 @@ function Market() {
                           Limited to {item.tasksperday} data per set,{" "}
                           {item?.setperday} sets of data everyday
                         </div>
-                        {currentUser?.withdrawlimit && (
+                        {item?.withdrawlimit && (
                           <div>
                             <strong>● </strong>
-                            Withdrawal limit: {currentUser?.withdrawlimit}
+                            Withdrawal limit: {item?.withdrawlimit}
                           </div>
                         )}
 
