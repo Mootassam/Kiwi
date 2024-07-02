@@ -1603,7 +1603,7 @@ button:disabled {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 60px;
+  gap: 30px;
   margin-top: 140px;
   height: auto;
   background-color: white;

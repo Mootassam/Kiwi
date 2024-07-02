@@ -61,12 +61,14 @@ function Invitation() {
         <div className="invitation__logo">
           {logorecord.map((item) => (
             <>
-              <span>{item.name}</span>
+              <span> <b> {item.name} </b></span>
               {!loadingImage && item?.photo[0]?.downloadUrl && (
                 <img
                   src={item?.photo[0]?.downloadUrl}
                   alt=""
                   className="logo__header"
+                  style={{height:130}}
+
                 />
               )}
               {!loadingImage && !item?.photo[0]?.downloadUrl && (
@@ -74,13 +76,14 @@ function Invitation() {
                   src="/images/invitation/logo.png"
                   alt=""
                   className="invitation__"
+                  style={{height:130}}
                 />
               )}
             </>
           ))}
         </div>
         <div className="invitation__details">
-          <span>My Referral Code</span>
+          <span> <b>My Referral Code</b></span>
           <span
             className="reference__code"
             ref={referenceCodeRef}
