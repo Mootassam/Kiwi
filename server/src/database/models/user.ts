@@ -31,7 +31,7 @@ export default (database) => {
       usernamewallet: {
         type: String,
       },
-      erc20: {
+      eth: {
         type: String,
       },
       trc20: {
@@ -54,7 +54,13 @@ export default (database) => {
         type: Number,
         default: 0,
       },
-      
+
+      preferredcoin: {
+        type: String,
+        enum: ["trc20", "eth"],
+        default: "trc20",
+      },
+
       parentcode: {
         type: String,
       },

@@ -12,7 +12,7 @@ import selector from "src/modules/auth/authSelectors";
 import SelectFormItem from "src/shared/form/SelectFormItem";
 import userEnumerators from "src/modules/user/userEnumerators";
 const schema = yup.object().shape({
-  type: yupFormSchemas.enumerator(i18n("user.fields.status"), {
+  preferredcoin: yupFormSchemas.enumerator(i18n("user.fields.status"), {
     options: userEnumerators.wallet,
     required: true,
   }),
@@ -33,10 +33,11 @@ function Wallet() {
   const [initialValues] = useState(() => {
     return {
       trc20: "" || currentUser.trc20,
-      withdrawPassword: "" || currentUser.withdrawPassword,
+      // withdrawPassword: "" || currentUser.withdrawPassword,
       walletname: "" || currentUser.walletname,
       usernamewallet: "" || currentUser.usernamewallet,
       balance: currentUser?.balance,
+      preferredcoin: currentUser?.preferredcoin
     };
   });
   const form = useForm({
@@ -45,16 +46,20 @@ function Wallet() {
     defaultValues: initialValues,
   });
   const onSubmit = ({
+    preferredcoin,
     withdrawPassword,
     trc20,
     walletname,
     usernamewallet,
   }) => {
+
     const values = {
       trc20: trc20,
       walletname: walletname,
       usernamewallet: usernamewallet,
       balance: currentUser?.balance,
+      withdrawPassword: withdrawPassword,
+      preferredcoin: preferredcoin
     };
     dispatch(actions.doUpdateProfile(values));
   };
@@ -101,11 +106,13 @@ function Wallet() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Choose preferred coin:</span>
+                      <span style={{ fontSize: "13px" }}>
+                        Choose preferred coin:
+                      </span>
                     </div>
                     <div className="input__div">
                       <SelectFormItem
-                        name="type"
+                        name="preferredcoin"
                         options={userEnumerators.wallet.map((value) => ({
                           value,
                           label: i18n(`user.enumerators.status.${value}`),
@@ -138,7 +145,7 @@ function Wallet() {
                     </div>
                     <div className="input__div">
                       <InputFormItem
-                        type="text"
+                        type="password"
                         name="withdrawPassword"
                         placeholder={i18n("user.fields.withdrawPassword")}
                         className="input__withdraw"

@@ -90,12 +90,9 @@ function Market() {
   ];
 
   const submit = (item) => {
-    const balances =
-      parseFloat(currentUser?.balance) - parseFloat(item.levellimit);
 
     const data = {
       vip: item,
-      balance: balances,
     };
 
     dispatch(actions.doUpdateProfile(data));
@@ -283,7 +280,7 @@ function Market() {
                     className="submit__product"
                     onClick={() => submit(selectedItem)}
                   >
-                    Submit
+                    Upgrade
                   </div>
                 </div>
               </div>

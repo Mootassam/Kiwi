@@ -23,11 +23,9 @@ function Tc() {
     <div>
       <SubHeader title="Certificate" path="/" />
       <div className="detaill__company" style={{ whiteSpace: "pre-line" }}>
-        
-        <img src="/images/certificate.jpg" />
-        <img src="/images/certificate2.png" />
         <img src="/images/Certificate3.jpg" />
-
+        <img src="/images/certificate2.png" />
+        <img src="/images/certificate.jpg" />
       </div>
     </div>
   );

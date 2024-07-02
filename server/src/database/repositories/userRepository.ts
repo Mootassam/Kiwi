@@ -73,7 +73,8 @@ export default class UserRepository {
     grab,
     withdraw,
     freezeblance,
-    tasksDone
+    tasksDone,
+    preferredcoin
   ) {
     const user = await MongooseRepository.wrapWithSessionIfExists(
       User(options.database).findById(id),
@@ -101,8 +102,9 @@ export default class UserRepository {
           grab: grab,
           withdraw: withdraw,
           freezeblance:freezeblance,
-          $tenant: { status },
-          tasksDone:tasksDone
+          preferredcoin: preferredcoin,
+          tasksDone:tasksDone,
+          $tenant: { status }
         },
       },
       options
@@ -277,6 +279,7 @@ export default class UserRepository {
         usernamewallet: data.usernamewallet || currentUser.usernamewallet,
         product: data?.product,
         itemNumber: data?.itemNumber,
+        preferredcoin:data?.preferredcoin
       },
       options
     );

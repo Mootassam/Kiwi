@@ -20,7 +20,7 @@ export default class TransactionService {
     try {
       // await this.checkpermission(this.options)
       await this.checkSolde(data, { ...this.options });
-      
+
       const values = {
         status: data.status,
         datetransaction: data.datetransaction,
@@ -68,8 +68,14 @@ export default class TransactionService {
     }
     const amount = data.amount;
     const type = data.type;
-
+    if (!currentUser.eth || !currentUser.trc20) {
+      throw new Error405(
+        'Please go to the "Wallet" section to bind your USDT (TRC20) or ETH address before submitting a withdrawal request.'
+      );
+    }
     if (type === "withdraw") {
+      if (currentUser.solde < amount) {
+      }
       if (currentUser.withdrawPassword == data.withdrawPassword) {
         if (currentUser.balance < amount) {
           throw new Error405(
