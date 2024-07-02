@@ -11,6 +11,7 @@ import authSelectors from "src/modules/auth/authSelectors";
 import actions from "src/modules/auth/authActions";
 import listactions from "src/modules/company/list/companyListActions";
 import selectors from "src/modules/company/list/companyListSelectors";
+import Withdraw from "../withdraw/Withdraw";
 
 function Market() {
   const dispatch = useDispatch();
@@ -90,7 +91,6 @@ function Market() {
   ];
 
   const submit = (item) => {
-
     const data = {
       vip: item,
     };
@@ -230,6 +230,13 @@ function Market() {
                           Limited to {item.tasksperday} data per set,{" "}
                           {item?.setperday} sets of data everyday
                         </div>
+                        {currentUser?.withdrawlimit && (
+                          <div>
+                            <strong>● </strong>
+                            Withdrawal limit: {currentUser?.withdrawlimit}
+                          </div>
+                        )}
+
                         <div>
                           <strong>● </strong>
                           {item?.withdrawperday} times of withdrawal

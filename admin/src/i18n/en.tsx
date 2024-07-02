@@ -106,6 +106,7 @@ const en = {
         commissionrate: ' commission',
         tasksDone:'tasksDone',
         levelLimit: 'Level Limit',
+        withdrawlimit: 'Withdraw Limit',
         tasksperday: 'Tasks per day',
         handlingfee: 'handlingfee',
         commissionmergedata: 'Commission Merge data',

@@ -38,12 +38,15 @@ export default (database) => {
       },
       tasksperday: { type: String },
       handlingfee: { type: String },
+      withdrawlimit: { type: String },
 
       //   status: {
       //     type: String,
       //     enum: ['enable', 'disable'],
       //     default: 'enable',
       //   },
+
+
 
       tenant: {
         type: Schema.Types.ObjectId,

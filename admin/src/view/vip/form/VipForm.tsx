@@ -96,6 +96,7 @@ function VipForm(props) {
       handlingfee: record.handlingfee,
       setperday: record.setperday,
       withdrawperday: record.withdrawperday,
+      withdrawlimit: record.withdrawlimit,
     };
   });
 
@@ -175,6 +176,17 @@ function VipForm(props) {
                 name="setperday"
                 label={i18n(
                   'entities.vip.fields.setperday',
+                )}
+                required={true}
+              />
+            </div>
+
+
+            <div className="col-lg-7 col-md-8 col-12">
+              <InputNumberFormItem
+                name="withdrawlimit"
+                label={i18n(
+                  'entities.vip.fields.withdrawlimit',
                 )}
                 required={true}
               />
