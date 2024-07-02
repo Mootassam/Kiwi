@@ -47,13 +47,17 @@ function Signin() {
   };
   return (
     <div className="auth__page">
-     
-
       <div className="auth__header">
         <h1 className="auth__title"> Login here</h1>
         <span className="auth__description">
           Welcome back you’ve been missed!
         </span>
+        <img src="/images/logo.png" alt="" style={{height:160}}  />
+
+      </div>
+
+      <div>
+
       </div>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -79,9 +83,8 @@ function Signin() {
 
           <div className="auth__bottom">
             <button className="auth__button" disabled={loading} type="submit">
-              <ButtonIcon loading={loading} /> 
-              <span>
-              Sign in</span>
+              <ButtonIcon loading={loading} />
+              <span>Sign in</span>
             </button>
             <Link to="/auth/signup" className="remove__ligne">
               <span className="auth__link">Create new account</span>
@@ -89,7 +92,6 @@ function Signin() {
           </div>
         </form>
       </FormProvider>
-
     </div>
   );
 }

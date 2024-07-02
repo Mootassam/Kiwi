@@ -183,7 +183,7 @@ function VipForm(props) {
 
 
             <div className="col-lg-7 col-md-8 col-12">
-              <InputNumberFormItem
+              <InputFormItem
                 name="withdrawlimit"
                 label={i18n(
                   'entities.vip.fields.withdrawlimit',
