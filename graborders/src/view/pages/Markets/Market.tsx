@@ -95,7 +95,7 @@ function Market() {
       vip: item,
     };
 
-    dispatch(actions.doUpdateProfile(data));
+    dispatch(actions.doUpdateProfileMobile(data));
   };
 
   const NewsTicker = ({ text }) => {

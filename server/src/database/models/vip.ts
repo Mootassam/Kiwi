@@ -36,17 +36,10 @@ export default (database) => {
       commissionmergedata: {
         type: String,
       },
+      
       tasksperday: { type: String },
       handlingfee: { type: String },
       withdrawlimit: { type: String },
-
-      //   status: {
-      //     type: String,
-      //     enum: ['enable', 'disable'],
-      //     default: 'enable',
-      //   },
-
-
 
       tenant: {
         type: Schema.Types.ObjectId,

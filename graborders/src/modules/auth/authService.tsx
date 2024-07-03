@@ -13,8 +13,6 @@ export default class AuthService {
   ) {
     const invitationToken = AuthInvitationToken.get();
 
-
-  
     const response = await authAxios.post("/auth/signupmobile", {
       email,
       password,
@@ -60,6 +58,16 @@ export default class AuthService {
     };
 
     const response = await authAxios.put("/auth/profile/mobile", body);
+
+    return response.data;
+  }
+
+  static async updateProfileMobile(data) {
+    const body = {
+      data,
+    };
+
+    const response = await authAxios.put("/auth/profile/", body);
 
     return response.data;
   }

@@ -224,6 +224,28 @@ const authActions = {
     }
   },
 
+  doUpdateProfileMobile: (data) => async (dispatch) => {
+    try {
+      dispatch({
+        type: authActions.UPDATE_PROFILE_START,
+      });
+
+      await service.updateProfileMobile(data);
+
+      dispatch({
+        type: authActions.UPDATE_PROFILE_SUCCESS,
+      });
+      await dispatch(authActions.doRefreshCurrentUser());
+      Message.success(i18n("auth.profile.vip"));
+      getHistory().push("/");
+    } catch (error) {
+      Errors.handle(error);
+      dispatch({
+        type: authActions.UPDATE_PROFILE_ERROR,
+      });
+    }
+  },
+
   doChangePassword: (oldPassword, newPassword) => async (dispatch) => {
     try {
       dispatch({
