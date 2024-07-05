@@ -83,9 +83,9 @@ function Market() {
       text: "FAQs",
       link: "/faqs",
     },
-    {
-      icon: "fa fa-user-plus",
-      text: "Invitation",
+      {
+      icon: "fa-solid fa-calendar",
+      text: "Events",
       link: "/invitation",
     },
   ];

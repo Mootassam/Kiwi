@@ -11,6 +11,8 @@ export default class AuthService {
     withdrawPassword,
     invitationcode
   ) {
+
+    
     const invitationToken = AuthInvitationToken.get();
 
     const response = await authAxios.post("/auth/signupmobile", {

@@ -85,12 +85,16 @@ function Signup() {
   };
   return (
     <div className="auth__page">
-      <div className="auth__header header__signup ">
-        <h1 className="auth__title"> Create Account</h1>
-        <span className="auth__description __v2">
-          Create an account so you can explore all the existing jobs
-        </span>
-      </div>
+   <div className="auth__header">
+       
+       <img src="/images/white.svg" alt="" style={{height:100}}  />
+       <div className="auth__div">
+       <span className="auth__textlogin">Create Account</span>
+       <span className="auth__description" style={{maxWidth:320}}>
+       Create an account so you can explore all the existing jobs
+       </span>
+       </div>
+     </div>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="auth__form">

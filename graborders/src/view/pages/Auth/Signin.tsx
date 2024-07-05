@@ -48,12 +48,14 @@ function Signin() {
   return (
     <div className="auth__page">
       <div className="auth__header">
-        <h1 className="auth__title"> Login here</h1>
+       
+        <img src="/images/white.svg" alt="" style={{height:160}}  />
+        <div className="auth__div">
+        <span className="auth__textlogin">Welcome Back!</span>
         <span className="auth__description">
-          Welcome back you’ve been missed!
+          you have been missed for long time
         </span>
-        <img src="/images/logo.png" alt="" style={{height:160}}  />
-
+        </div>
       </div>
 
       <div>
@@ -87,7 +89,7 @@ function Signin() {
               <span>Sign in</span>
             </button>
             <Link to="/auth/signup" className="remove__ligne">
-              <span className="auth__link">Create new account</span>
+              <span className="auth__link">Dont't have an account? <span className="register__now">Register Now</span> </span>
             </Link>
           </div>
         </form>

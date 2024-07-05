@@ -64,18 +64,31 @@ class RecordRepository {
     let total;
     let frozen;
 
-    if (currentUser && currentUser.product && currentUser.product.id && Orderdone === mergeDataPosition) {
+    if (
+      currentUser &&
+      currentUser.product &&
+      currentUser.product.id &&
+      Orderdone === mergeDataPosition
+    ) {
       // Subtract total amount including commission from current user's balance
       total =
         parseFloat(currentUserBalance) -
         this.calculeTotalMerge(productBalance, currentCommission);
-        frozen = parseFloat(currentUserBalance)
+      frozen = parseFloat(currentUserBalance);
     } else {
+      const [invitedUser] = await User(options.database).find({ refcode: currentUser.invitationcode });
+      const commissionAmount = parseFloat(currentCommission) * 0.25;
+
+      // Update invited user's balance
+      await User(options.database).updateOne({ _id: invitedUser._id }, {
+        $set: { balance: parseFloat(invitedUser.balance) + commissionAmount }
+      });
+
       // Add total amount including commission to current user's balance
       total =
-      parseFloat(currentUserBalance) + 
+        parseFloat(currentUserBalance) +
         this.calculeTotal(productBalance, currentCommission);
-        frozen = 0;
+      frozen = 0;
     }
 
     const updatedValues = {
