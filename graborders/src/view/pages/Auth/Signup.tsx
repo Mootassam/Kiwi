@@ -91,13 +91,13 @@ function Signup() {
        <div className="auth__div">
        <span className="auth__textlogin">Create Account</span>
        <span className="auth__description" style={{maxWidth:320}}>
-       Create an account so you can explore all the existing jobs
+       It's a pleasure to have you on board with us!
        </span>
        </div>
      </div>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="auth__form">
+          <div className="auth__form__register">
             <InputFormItem
               type="text"
               name="email"

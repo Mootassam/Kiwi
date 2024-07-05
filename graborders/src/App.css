@@ -1963,6 +1963,17 @@ button:disabled {
   gap: 13px;
 }
 
+.auth__form__register{ 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+  /* padding-top: 20px; */
+  /* gap: 5px; */
+
+}
+
 .auth__input {
   width: 357px;
   padding: 20px;
