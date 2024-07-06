@@ -48,52 +48,58 @@ function Signin() {
   return (
     <div className="auth__page">
       <div className="auth__header">
-       
-        <img src="/images/white.svg" alt="" style={{height:160}}  />
+        <img src="/images/white.svg" alt="" style={{ height: 100 }} />
         <div className="auth__div">
-        <span className="auth__textlogin">Welcome</span>
-        {/* <span className="auth__description">
+          <span className="auth__textlogin">Welcome</span>
+          {/* <span className="auth__description">
           you have been missed for long time
         </span> */}
         </div>
       </div>
 
-      <div>
+      <div className="signin__design">
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="auth__form">
+              <div className="form__authgroup">
+                <div className="group__text">Username</div>
+                <InputFormItem
+                  type="text"
+                  name="email"
+                  placeholder={i18n("user.fields.username")}
+                  className="auth__input"
+                  externalErrorMessage={externalErrorMessage}
+                />
+              </div>
+              <div className="form__authgroup">
+                <div className="group__text">Password</div>
+                <InputFormItem
+                  type="text"
+                  name="password"
+                  placeholder={i18n("user.fields.password")}
+                  className="auth__input"
+                />
+              </div>
+            </div>
 
+            <div className="auth__bottom">
+              <button className="auth__button" disabled={loading} type="submit">
+                <i className="fa fa-arrow-right" style={{fontSize:34}}></i>
+                <ButtonIcon loading={loading} />
+              </button>
+            
+            </div>
+          </form>
+        </FormProvider>
+
+      
       </div>
-      <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="auth__form">
-            <div className="form__authgroup">
-              <InputFormItem
-                type="text"
-                name="email"
-                placeholder={i18n("user.fields.username")}
-                className="auth__input"
-                externalErrorMessage={externalErrorMessage}
-              />
-            </div>
-            <div className="form__authgroup">
-              <InputFormItem
-                type="text"
-                name="password"
-                placeholder={i18n("user.fields.password")}
-                className="auth__input"
-              />
-            </div>
-          </div>
-
-          <div className="auth__bottom">
-            <button className="auth__button" disabled={loading} type="submit">
-              <ButtonIcon loading={loading} />
-              <span>Sign in</span>
-            </button>
-            <Link to="/auth/signup" className="remove__ligne">
-              <span className="auth__link">Dont't have an account? <span className="register__now">Register Now</span> </span>
-            </Link>
-          </div>
-        </form>
-      </FormProvider>
+      <Link to="/auth/signup" className="remove__ligne">
+                <span className="auth__link">
+                  Dont't have an account?{" "}
+                  <span className="register__now">Register Now</span>{" "}
+                </span>
+              </Link>
     </div>
   );
 }

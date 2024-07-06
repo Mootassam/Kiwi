@@ -1898,7 +1898,7 @@ button:disabled {
   padding-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 46px;
+  gap: 36px;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -1956,7 +1956,7 @@ button:disabled {
 .auth__form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   position: relative;
   z-index: 100;
   padding-top: 20px;
@@ -1973,12 +1973,25 @@ button:disabled {
   /* gap: 5px; */
 
 }
+.signin__design { 
+
+  background-color: #fff;
+
+  border-radius: 5px;
+  max-width: 550px;
+  margin: auto;
+  margin-top: 30px;
+
+
+
+
+}
 
 .auth__input {
-  width: 357px;
-  padding: 20px;
+  /* width: 357px; */
+  /* padding: 20px; */
   border: none;
-  background-color: #f1f4ff;
+  /* background-color: #f1f4ff; */
   color: #666;
   font-size: 14px;
 }
@@ -1988,14 +2001,19 @@ button:disabled {
 
 .auth__button {
   width: 100%;
-  max-width: 357px;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  top:25px;
+  margin-top: 0px !important;
+  border-radius: 50%;
   align-items: center;
   justify-content: center;
   font-weight: 600;
   font-size: 20px;
   padding: 15px;
   background-color: #007bff;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2010,6 +2028,10 @@ button:disabled {
   display: flex;
   align-items: center;
   gap:5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 55px;
 }
 .auth__bottom {
   display: flex;
@@ -2023,14 +2045,15 @@ button:disabled {
 }
 
 .__danger {
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   color: red !important;
 }
 .invalid-feedback {
   color: red;
   font-size: 14px;
-  padding-top: 5px;
+  /* padding-top: 5px; */
 }
+
 
 .spinner {
   border: 3px solid rgba(255, 255, 255, 0.2); /* White color with opacity */
@@ -2618,4 +2641,19 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.form__authgroup {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+  gap:10px;
+
+}
+
+input:focus{ 
+  outline: none !important;
 }
