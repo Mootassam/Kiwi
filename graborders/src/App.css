@@ -1947,6 +1947,8 @@ button:disabled {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-color: #091F34;
+  padding-left: 3%;
+  padding-right: 3%;
 }
 
 ::-webkit-scrollbar {
