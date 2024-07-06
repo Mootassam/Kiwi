@@ -52,9 +52,9 @@ function Signin() {
         <img src="/images/white.svg" alt="" style={{height:160}}  />
         <div className="auth__div">
         <span className="auth__textlogin">Welcome</span>
-        <span className="auth__description">
+        {/* <span className="auth__description">
           you have been missed for long time
-        </span>
+        </span> */}
         </div>
       </div>
 
