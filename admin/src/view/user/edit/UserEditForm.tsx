@@ -322,6 +322,8 @@ function UserEditForm(props) {
               <ProductAutocompleteFormItem
                 name="product"
                 label={i18n('user.fields.product')}
+                mode="multiple"
+                
               />
             </Col>
           </Row>

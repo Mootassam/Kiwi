@@ -1946,7 +1946,7 @@ button:disabled {
   overflow-y: scroll;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  background: url("https://www.click.co.uk/wp-content/themes/clickconsult/assets/images/bg/solid-blue-logo.png");
+  background-color: #091F34;
 }
 
 ::-webkit-scrollbar {
@@ -1994,7 +1994,7 @@ button:disabled {
   font-weight: 600;
   font-size: 20px;
   padding: 15px;
-  background-color: #404B5C;
+  background-color: #007bff;
   margin-top: 50px;
   display: flex;
   align-items: center;
