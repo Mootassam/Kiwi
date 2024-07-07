@@ -90,27 +90,65 @@ class RecordRepository {
       throw new Error("Failed to create combo");
     }
   }
-
   static async updateCombo(options: IRepositoryOptions) {
-
+    try {
       await this.checkOrder(options);
-
-      // Fetch the items with status "pending"
-      const items = await Records(options.database).find({
-        $or: [{ status: "pending" }, { status: "frozen" }]
-      });  
-      // Check if items is an array
-      if (Array.isArray(items)) {
-        // Iterate through the items array and update each one
-        for (const item of items) {
-          await Records(options.database).updateOne(
-            { product: item.product },
-            { status: 'completed' }
-          );
+      const currentUser = MongooseRepository.getCurrentUser(options);
+      if (!currentUser) {
+        console.error("Current user not found");
+        return;
+      }
+  
+      const database = options.database;
+      let totalCombo = 0;
+      let totalCommission = 0;
+  
+      // Fetch the items with status "pending" or "frozen"
+      const items = await Records(database).find({
+        status: { $in: ["pending", "frozen"] },
+      });
+  
+      if (!Array.isArray(items) || items.length === 0) {
+        console.log("No pending or frozen items found.");
+        return;
+      }
+  
+      const productIds = items.map(item => item.product);
+      const products = await Product(database).find({
+        _id: { $in: productIds },
+      });
+  
+      const productMap = new Map(products.map(product => [product._id.toString(), product]));
+  
+      for (const item of items) {
+        const product = productMap.get(item.product.toString());
+  
+        if (product && product.amount) {
+          const amount = parseFloat(product.amount) || 0;
+          const commission = (parseFloat(product.commission) / 100) * amount || 0;
+  
+          totalCombo += amount;
+          totalCommission += commission;
         }
       }
-   
+  
+      // Update the items status in a single operation
+      await Records(database).updateMany(
+        { product: { $in: productIds } },
+        { $set: { status: "completed" } }
+      );
+  
+      const newBalance = totalCombo + parseFloat(currentUser.balance) + totalCommission;
+      await User(database).updateOne(
+        { _id: currentUser.id },
+        { $set: { balance: newBalance } }
+      );
+  
+    } catch (error) {
+      console.error("Error updating combo:", error);
+    }
   }
+  
   
 
   static async Number() {
