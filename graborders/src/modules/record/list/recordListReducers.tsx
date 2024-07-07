@@ -9,6 +9,7 @@ const initialData = {
   total: 0,
   loading: false,
   loadingday: false,
+  loadingUpdate: false,
   countsday: 0,
   filter: {},
   rawFilter: {},
@@ -143,6 +144,38 @@ export default (state = initialData, { type, payload }) => {
       error: payload
     };
   }
+
+
+
+
+
+
+
+
+  if (type === actions.UPDATE_STARTED) {
+    return {
+      ...state,
+      loadingUpdate: true,
+    };
+  }
+
+  if (type === actions.UPDATE_SUCCESS) {
+    return {
+      ...state,
+      loadingUpdate: false,
+    };
+  }
+
+  if (type === actions.UPDATE_ERROR) {
+    return {
+      ...state,
+      loadingUpdate: false,
+      error: payload
+    };
+  }
+
+
+
 
 
   if (type === actions.COUNT_STARTED) {

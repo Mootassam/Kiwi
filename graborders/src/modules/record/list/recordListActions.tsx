@@ -9,6 +9,14 @@ const recordListActions = {
   FETCH_SUCCESS: `${prefix}_FETCH_SUCCESS`,
   FETCH_ERROR: `${prefix}_FETCH_ERROR`,
 
+
+
+  UPDATE_STARTED: `${prefix}_UPDATE_STARTED`,
+  UPDATE_SUCCESS: `${prefix}_UPDATE_SUCCESS`,
+  UPDATE_ERROR: `${prefix}_UPDATE_ERROR`,
+
+
+
   CHECK_STARTED: `${prefix}_CHECK_STARTED`,
   CHECK_SUCCESS: `${prefix}_CHECK_SUCCESS`,
   CHECK_ERROR: `${prefix}_CHECK_ERROR`,
@@ -108,6 +116,27 @@ const recordListActions = {
     }
   },
 
+  doUpdateCombo: () => async (dispatch) => {
+    try {
+      dispatch({
+        type: recordListActions.UPDATE_STARTED,
+      });
+      await RecordService.updateCombo();
+      dispatch({
+        type: recordListActions.UPDATE_SUCCESS,
+      });
+    } catch (error) {
+      Errors.handle(error);
+
+      dispatch({
+        type: recordListActions.UPDATE_ERROR,
+        // payload: error?.response?.data,
+        payload: error,
+      });
+    }
+  },
+
+
   doCheck: () => async (dispatch) => {
     try {
       dispatch({
@@ -119,7 +148,6 @@ const recordListActions = {
       });
     } catch (error) {
       Errors.handle(error);
-
       dispatch({
         type: recordListActions.CHECK_ERROR,
         // payload: error?.response?.data,

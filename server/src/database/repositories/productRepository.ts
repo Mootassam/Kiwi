@@ -241,9 +241,9 @@ class ProductRepository {
     const Orderdone = (await RecordRepository.CountOrder(options)).record;
     const mergeDataPosition = currentUser.itemNumber;
 
-    if (currentUser && currentUser.product && currentUser.product.id && Orderdone === mergeDataPosition) {
-
-      let prodcut = currentUser.product;
+    if (currentUser && currentUser.product && currentUser.product[0].id && currentUser.tasksDone === mergeDataPosition) {
+      
+      let prodcut = currentUser.product[0];
       prodcut.photo = await FileRepository.fillDownloadUrl(prodcut?.photo);
       return prodcut;
     } else {

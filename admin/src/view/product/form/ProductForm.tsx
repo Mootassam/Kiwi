@@ -12,6 +12,8 @@ import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
 import Storage from 'src/security/storage';
 import VipAutocompleteFormItem from 'src/view/vip/autocomplete/VipAutocompleteFormItem';
 import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import recordEnumerators from 'src/modules/record/recordEnumerators';
 
 const schema = yup.object().shape({
   vip: yupFormSchemas.relationToOne(
@@ -51,7 +53,9 @@ function ProductForm(props) {
       commission: record.commission,
       vip: record.vip || [],
       photo: record.photo,
+      status:record.status,
       combo: record.combo,
+
     };
   });
 
@@ -123,6 +127,23 @@ function ProductForm(props) {
                   Storage.values.categoryPhoto
                 }
                 max={undefined}
+              />
+            </div>
+            <div className="col-lg-7 col-md-8 col-12">
+              <SelectFormItem
+                name="status"
+                label={i18n(
+                  'entities.record.fields.status',
+                )}
+                options={recordEnumerators.status.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.record.enumerators.status.${value}`,
+                    ),
+                  }),
+                )}
+                required={true}
               />
             </div>
 

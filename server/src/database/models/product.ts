@@ -27,6 +27,11 @@ export default (database) => {
         default: false,
       },
      
+      status: {
+        type: String,
+        enum: ["pending", "completed", "frozen"],
+      },
+
       vip: {
         type: Schema.Types.ObjectId,
         ref: "vip",

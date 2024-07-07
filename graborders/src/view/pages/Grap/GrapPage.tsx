@@ -39,15 +39,14 @@ const Grappage = () => {
   const [lodingRoll, setLoadingRoll] = useState(false);
   const selectCountRecord = useSelector(recordSelector.selectCountRecord);
 
+
   const error = useSelector(recordSelector.selectError);
 
   const refreshItems = useCallback(async () => {
     await dispatch(actions.doFetch());
-   await dispatch(recordListAction.doFetch());
-   await dispatch(authActions.doRefreshCurrentUser());
-
+    await dispatch(recordListAction.doFetch());
+    await dispatch(authActions.doRefreshCurrentUser());
   }, [dispatch]);
-
 
   const displayRandomImage = () => {
     // Function to update the image source
@@ -130,14 +129,12 @@ const Grappage = () => {
 
   const rollAll = async () => {
     try {
-      setShowModal(true);
       setLoadingRoll(true);
       await dispatch(recordListAction.doCheck());
       if (error) {
         return;
       }
       await dispatch(actions.doFetch());
-
       setTimeout(() => {
         setShowModal(true);
       }, 1000);
@@ -167,7 +164,6 @@ const Grappage = () => {
   };
 
   const currentUser = useSelector(authSelectors.selectCurrentUser);
-
   const submit = async () => {
     const values = {
       number: number,
@@ -175,15 +171,15 @@ const Grappage = () => {
       status: items?.combo ? "pending" : "completed",
       user: currentUser.id,
     };
-    dispatch(recordActions.doCreate(values));
-    setShowModal(false);
+    items.combo
+      ? dispatch(recordActions.doCreateCombo(values))
+      : dispatch(recordActions.doCreate(values));
 
+    setShowModal(false);
     await refreshItems();
   };
 
-  const goto = (param) => {
-    history.push(param);
-  };
+
   return (
     <>
       <div className="app__grappage">
@@ -334,7 +330,7 @@ const Grappage = () => {
                   <div>Order Time: {Dates.current()}</div>
                   <div>Order Number: N{number}</div>
                 </div>
-                <div className="badge__ pending">
+                <div className="badge__single pending__">
                   <label>Pending</label>
                 </div>
                 <div className="product__image">

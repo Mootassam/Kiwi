@@ -74,6 +74,32 @@ const recordFormActions = {
     }
   },
 
+  doCreateCombo: (values) => async (dispatch) => {
+    try {
+      dispatch({
+        type: recordFormActions.CREATE_STARTED,
+      });
+
+      await RecordService.createCombo(values);
+
+      dispatch({
+        type: recordFormActions.CREATE_SUCCESS,
+      });
+
+      Message.success(
+        i18n('entities.record.create.success'),
+      );
+
+      getHistory().push('/grap');
+    } catch (error) {
+      Errors.handle(error);
+
+      dispatch({
+        type: recordFormActions.CREATE_ERROR,
+      });
+    }
+  },
+
   doUpdate: (id, values) => async (dispatch, getState) => {
     try {
       dispatch({

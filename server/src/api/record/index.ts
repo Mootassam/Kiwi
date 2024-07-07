@@ -1,6 +1,11 @@
 export default (app) => {
   app.post(`/tenant/:tenantId/record`, require("./recordCreate").default);
+  app.post(`/tenant/:tenantId/record/combo`, require("./recordCombo").default);
+
   app.put(`/tenant/:tenantId/record/:id`, require("./recordUpdate").default);
+
+  app.put(`/tenant/:tenantId/record/combo/update`, require("./recordUpdatesCombo").default);
+
   app.post(
     `/tenant/:tenantId/record/import`,
     require("./recordImport").default

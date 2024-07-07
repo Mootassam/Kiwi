@@ -90,7 +90,7 @@ const en = {
         status: {
           pending: 'Pending',
           completed: 'Completed',
-          canceled: 'Canceled',
+          frozen: 'Frozen',
         },
       },
     },

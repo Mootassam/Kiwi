@@ -18,6 +18,17 @@ export default class RecordService {
     return response.data;
   }
 
+  static async updateCombo() {
+
+    const tenantId = AuthCurrentTenant.get();
+
+    const response = await authAxios.put(
+      `/tenant/${tenantId}/record/combo/update`,
+    );
+
+    return response.data;
+  }
+
   static async destroyAll(ids) {
     const params = {
       ids,
@@ -47,6 +58,21 @@ export default class RecordService {
     return response.data;
   }
 
+
+  static async createCombo(data) {
+    const body = {
+      data,
+    };
+
+    const tenantId = AuthCurrentTenant.get();
+
+    const response = await authAxios.post(
+      `/tenant/${tenantId}/record/combo`,
+      body,
+    );
+
+    return response.data;
+  }
   static async count() { 
     const tenantId = AuthCurrentTenant.get();
     const response = await authAxios.get(

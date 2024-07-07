@@ -97,7 +97,7 @@ function CouponsListTable(props) {
     switch(status) {
       case "pending":
         return "pending";
-      case "canceled":
+      case "frozen":
         return "canceled";
       default:
         return "completed";

@@ -50,7 +50,7 @@ const schema = yup.object().shape({
     max: 100,
   }),
 
-  product: yupFormSchemas.relationToOne(
+  product: yupFormSchemas.relationToMany(
     i18n('prodcut'),
     {},
   ),

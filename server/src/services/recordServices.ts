@@ -2,6 +2,7 @@ import Error400 from "../errors/Error400";
 import MongooseRepository from "../database/repositories/mongooseRepository";
 import { IServiceOptions } from "./IServiceOptions";
 import RecordRepository from "../database/repositories/recordRepository";
+import User from "../database/models/user";
 
 export default class RecordServices {
   options: IServiceOptions;
@@ -36,6 +37,85 @@ export default class RecordServices {
       throw error;
     }
   }
+
+  async createCombo(data) {
+    const session = await MongooseRepository.createSession(
+      this.options.database
+    );
+    const currentUser = MongooseRepository.getCurrentUser(this.options);
+    const mergeDataPosition = currentUser.itemNumber;
+
+    try {
+      if (
+        currentUser &&
+        currentUser.product &&
+        currentUser.product[0]?.id &&
+        currentUser.tasksDone === mergeDataPosition
+      ) {
+        if (Array.isArray(currentUser.product)) {
+          for (const item of currentUser.product) {
+            const number = await RecordRepository.Number();
+            const values = {
+              number,
+              product: item.id,
+              status: item?.status,
+              user: currentUser.id,
+            };
+            await RecordRepository.createCombo(values, {
+              ...this.options,
+              session,
+            });
+            await User(this.options.database).updateOne(
+              { _id: currentUser.id },
+              {
+                $set: {
+                  tasksDone: currentUser.tasksDone + currentUser.product.length,
+                },
+              }
+            );
+          }
+        }
+      }
+      await MongooseRepository.commitTransaction(session);
+    } catch (error) {
+      await MongooseRepository.abortTransaction(session);
+
+      MongooseRepository.handleUniqueFieldError(
+        error,
+        this.options.language,
+        "mandat"
+      );
+
+      throw error;
+    }
+  }
+
+  async updateCombo() {
+    const session = await MongooseRepository.createSession(
+      this.options.database
+    );
+    try {
+      const record = await RecordRepository.updateCombo(this.options);
+    
+    
+    return record;
+    
+    
+    }
+      catch(error){
+
+        await MongooseRepository.abortTransaction(session);
+
+        MongooseRepository.handleUniqueFieldError(
+          error,
+          this.options.language,
+          "mandat"
+        );
+  
+        throw error;
+      }
+      }
+
 
   async count() {
     const session = await MongooseRepository.createSession(

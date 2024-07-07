@@ -16,28 +16,47 @@ function Portfolio() {
   const selectHasRows = useSelector(selectors.selectHasRows);
   // const [limit, setLimit] = useState<number>(10);
   // const count = useSelector(selectors.selectCount);
+  const loadingUpdate = useSelector(selectors.loadingUpdate)
 
-  useEffect(() => {
+  const submit =() =>{ 
+    dispatch(actions.doUpdateCombo());
+    refreshItems()
+  }
+
+  const refreshItems =()=> {
     const values = {
       status: active,
     };
 
-
     dispatch(actions.doFetch(values, values));
-  }, [dispatch, active]);
+  }
 
+  useEffect(() => {
+   refreshItems()
+  }, [dispatch, active]);
 
   const All = () => (
     <>
       {record.map((item, index) => (
         <div className="single__product" key={`${item.id}-${index}`}>
-          <div className="order__time">
-            <div>Order Time: {Dates.currentDate(item?.date)}</div>
-            <div>Order Number: {item.number}</div>
+          <div className="product__group">
+            <div className="order__time">
+              <div>Order Time: {Dates.currentDate(item?.date)}</div>
+              <div>Order Number: {item.number}</div>
+            </div>
+
+            <div className="status__group">
+              <div className={`badge__ ${item?.status}`}>
+                <label>{item?.status}</label>
+              </div>
+              {item?.status === "pending" ? (
+                <div className="btn__badge" onClick={() => submit()}>Submit</div>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
-          <div className={`badge__ ${item?.status}`}>
-            <label>{item?.status}</label>
-          </div>
+
           <div className="product__image">
             <div className="image__">
               <img src={item?.product?.photo[0]?.downloadUrl} alt="" />
@@ -84,9 +103,14 @@ function Portfolio() {
           flexDirection: "column",
         }}
       >
- 
         <div className="order__list">
           <div className="list__actions">
+            <div
+              onClick={() => setActive("")}
+              className={active === "" ? `active__order` : ""}
+            >
+              <span>All</span>
+            </div>
             <div
               onClick={() => setActive("completed")}
               className={active === "completed" ? `active__order` : ""}
@@ -100,10 +124,10 @@ function Portfolio() {
               <span>Pending</span>
             </div>
             <div
-              onClick={() => setActive("canceled")}
-              className={active === "canceled" ? `active__order` : ""}
+              onClick={() => setActive("frozen")}
+              className={active === "frozen" ? `active__order` : ""}
             >
-              <span>Canceled</span>
+              <span>Frozen</span>
             </div>
           </div>
         </div>
