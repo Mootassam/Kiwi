@@ -46,12 +46,8 @@ export default class RecordServices {
     const mergeDataPosition = currentUser.itemNumber;
 
     try {
-      if (
-        currentUser &&
-        currentUser.product &&
-        currentUser.product[0]?.id &&
-        currentUser.tasksDone === mergeDataPosition
-      ) {
+      if (currentUser && currentUser.product && currentUser.product.length > 0 && currentUser.product[0].id && currentUser.tasksDone === mergeDataPosition) {
+
         if (Array.isArray(currentUser.product)) {
           for (const item of currentUser.product) {
             const number = await RecordRepository.Number();

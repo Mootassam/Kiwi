@@ -91,8 +91,9 @@ class RecordRepository {
     }
   }
   static async updateCombo(options: IRepositoryOptions) {
+    await this.checkOrder(options);
+
     try {
-      await this.checkOrder(options);
       const currentUser = MongooseRepository.getCurrentUser(options);
       if (!currentUser) {
         console.error("Current user not found");
