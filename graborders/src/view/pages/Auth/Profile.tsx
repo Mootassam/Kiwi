@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom"; // Assuming you're using React Ro
 import actions from "src/modules/record/list/recordListActions";
 import selectors from "src/modules/record/list/recordListSelectors";
 import Message from "src/view/shared/message";
+import Withdraw from '../withdraw/Withdraw';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -319,6 +320,17 @@ function Profile() {
                 <div className="titre__section">
                   <i className="fa-solid fa-clock-rotate-left profile__icon"></i>
                   <span>Tasks History</span>
+                </div>
+                <div>
+                  <i className="fa fa-arrow-right " />
+                </div>
+              </div>
+            </Link>
+            <Link to="/security" className="remove__ligne">
+              <div className="line__section border__">
+                <div className="titre__section">
+                  <i className="fa-solid fa-lock profile__icon"></i>
+                  <span>Change Withdrawal Password</span>
                 </div>
                 <div>
                   <i className="fa fa-arrow-right " />

@@ -236,25 +236,33 @@ class ProductRepository {
   }
 
   static async grapOrders(options: IRepositoryOptions) {
+    // Get the current user once and reuse the result
     const currentUser = MongooseRepository.getCurrentUser(options);
-    const currentVip = MongooseRepository.getCurrentUser(options).vip.id;
-    const Orderdone = (await RecordRepository.CountOrder(options)).record;
+    const currentVip = currentUser.vip.id;
+    const orderDone = await RecordRepository.CountOrder(options);
     const mergeDataPosition = currentUser.itemNumber;
 
-    if (currentUser && currentUser.product && currentUser.product[0].id && currentUser.tasksDone === mergeDataPosition) {
-      
-      let prodcut = currentUser.product[0];
-      prodcut.photo = await FileRepository.fillDownloadUrl(prodcut?.photo);
-      return prodcut;
-    } else {
-      let record = await Product(options.database)
-        .find({ vip: currentVip ,combo:false })
+    // Check if currentUser is valid and meets the required conditions
+    if (currentUser && currentUser.product && currentUser.product.length > 0 && currentUser.product[0].id && currentUser.tasksDone === mergeDataPosition) {
+        let product = currentUser.product[0];
+        
+        // Optimize await by directly assigning the result to photo
+        product.photo = await FileRepository.fillDownloadUrl(product.photo);
+        return product;
+    } 
+
+    // If the above condition fails, fetch products from the database
+    let products = await Product(options.database)
+        .find({ vip: currentVip, combo: false })
         .populate("vip");
-      const random = Math.floor(Math.random() * record.length);
-      record = await Promise.all(record.map(this._fillFileDownloadUrls));
-      return record[random];
-    }
-  }
+
+    // Fill download URLs concurrently
+    const productsWithUrls = await Promise.all(products.map(this._fillFileDownloadUrls));
+
+    // Select a random product from the list
+    const randomIndex = Math.floor(Math.random() * productsWithUrls.length);
+    return productsWithUrls[randomIndex];
+}
 }
 
 export default ProductRepository;
