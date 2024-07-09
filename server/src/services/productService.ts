@@ -97,13 +97,10 @@ export default class ProductServices {
     return ProductRepository.findAndCountAll(args, this.options);
   }
 
-  async checkpermission(options) { 
+  async checkpermission(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
-if( currentUser.grab) return 
-
-throw new Error405("Should be contact the customer service about this");
-
-
+    if (currentUser.grab) return;
+    throw new Error405("Should be contact the customer service about this");
   }
 
   async grapOrders(args) {
@@ -117,7 +114,6 @@ throw new Error405("Should be contact the customer service about this");
     } catch (error) {
       await MongooseRepository.abortTransaction(session);
       throw error;
-
     }
   }
 

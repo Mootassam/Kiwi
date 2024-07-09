@@ -11,6 +11,10 @@ export default (app) => {
     `/tenant/:tenantId/user/import`,
     require('./userImport').default,
   );
+
+
+
+
   app.delete(
     `/tenant/:tenantId/user`,
     require('./userDestroy').default,

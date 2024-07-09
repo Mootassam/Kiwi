@@ -11,6 +11,7 @@ import TenantRepository from "../../database/repositories/tenantRepository";
 import { tenantSubdomain } from "../tenantSubdomain";
 import Error401 from "../../errors/Error401";
 import moment from "moment";
+import Error405 from "../../errors/Error405";
 
 const BCRYPT_SALT_ROUNDS = 12;
 
@@ -40,16 +41,14 @@ class AuthService {
 
       // const countUser = await UserRepository.CountUser(options);
 
-  
-        const checkrefCode = await UserRepository.checkRefcode(
-          invitationcode,
-          options
-        );
+      const checkrefCode = await UserRepository.checkRefcode(
+        invitationcode,
+        options
+      );
 
-        if (!checkrefCode) {
-          throw new Error400(options.language, "auth.invitationCode");
-        }
- 
+      if (!checkrefCode) {
+        throw new Error400(options.language, "auth.invitationCode");
+      }
 
       // The user may already exist on the database in case it was invided.
       if (existingUser) {
@@ -82,10 +81,15 @@ class AuthService {
         // Handles onboarding process like
         // invitation, creation of default tenant,
         // or default joining the current tenant
-        await this.handleOnboardMobile(existingUser, invitationToken, tenantId, {
-          ...options,
-          session,
-        });
+        await this.handleOnboardMobile(
+          existingUser,
+          invitationToken,
+          tenantId,
+          {
+            ...options,
+            session,
+          }
+        );
 
         // Email may have been alreadyverified using the invitation token
         const isEmailVerified = Boolean(
@@ -192,7 +196,6 @@ class AuthService {
     }
   }
 
-
   static async signup(
     email,
     password,
@@ -219,16 +222,14 @@ class AuthService {
 
       // const countUser = await UserRepository.CountUser(options);
 
-  
-        // const checkrefCode = await UserRepository.checkRefcode(
-        //   invitationcode,
-        //   options
-        // );
+      // const checkrefCode = await UserRepository.checkRefcode(
+      //   invitationcode,
+      //   options
+      // );
 
-        // if (!checkrefCode) {
-        //   throw new Error400(options.language, "auth.invitationCode");
-        // }
- 
+      // if (!checkrefCode) {
+      //   throw new Error400(options.language, "auth.invitationCode");
+      // }
 
       // The user may already exist on the database in case it was invided.
       if (existingUser) {
@@ -431,9 +432,12 @@ class AuthService {
     }
   }
 
-  static async handleOnboardMobile(currentUser, invitationToken, tenantId, options) {
-
-    
+  static async handleOnboardMobile(
+    currentUser,
+    invitationToken,
+    tenantId,
+    options
+  ) {
     if (invitationToken) {
       try {
         await TenantUserRepository.acceptInvitation(invitationToken, {
@@ -685,6 +689,21 @@ class AuthService {
     return new EmailSender(EmailSender.TEMPLATES.PASSWORD_RESET, {
       link,
     }).sendTo(email);
+  }
+
+  static async updateWithdrawal(oldPassword,newPassword, options) {
+    try {
+      const currentUser = MongooseRepository.getCurrentUser(options);
+
+      if (currentUser.withdrawPassword !== oldPassword) {
+        throw new Error405(
+          "Your withdraw Password is not correct please check again"
+        );
+      }
+      await UserRepository.updateWithdrawalPassword(oldPassword,newPassword, options);
+    } catch (error) {
+      throw error;
+    }
   }
 
   static async verifyEmail(token, options) {

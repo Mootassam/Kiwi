@@ -73,6 +73,8 @@ export default class AuthProfileEditor {
     }
   }
 
+
+
   async _validate() {
     assert(this.options.currentUser, "currentUser is required");
     assert(this.options.currentUser.id, "currentUser.id is required");

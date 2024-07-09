@@ -113,6 +113,12 @@ const screenRoutes = [
     exact: true,
   },
   {
+    path: "/withdrawalPassword",
+    loader: () => import("src/view/pages/Auth/ChangewithdrawalPassword"),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+  {
     path: "/transacation",
     loader: () => import("src/view/pages/Transactions/Transaction"),
     permissionRequired: permissions.categoryRead,

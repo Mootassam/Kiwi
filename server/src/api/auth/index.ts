@@ -69,6 +69,13 @@ export default (app) => {
 
 
   app.put(
+    `/auth/withdrawal`,
+    require('./userWithdrawal').default,
+  );
+
+
+
+  app.put(
     `/auth/change-password`,
     require('./authPasswordChange').default,
   );

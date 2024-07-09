@@ -273,7 +273,7 @@ function Market() {
                   Commission Rate: {selectedItem?.comisionrate}
                 </div>
               </div>
-              <div className="badge__ pending">
+              <div className="badge__single pending__">
                 <label>Pending</label>
               </div>
 

@@ -5,10 +5,9 @@ function Events() {
   return (
     <div>
       <SubHeader title="Events" path="/" />
-      <div
-        className="detaill__company"
-        style={{ whiteSpace: "pre-line" }}
-      ></div>
+      <div className="detaill__company" style={{ whiteSpace: "pre-line" }}>
+        <img src="/images/events/1.jpg" />
+      </div>
     </div>
   );
 }

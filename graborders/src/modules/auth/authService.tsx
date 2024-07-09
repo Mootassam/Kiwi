@@ -85,6 +85,18 @@ export default class AuthService {
     return response.data;
   }
 
+
+  static async changeWithdrawalPassword(oldPassword, newPassword) {
+    const body = {
+      oldPassword,
+      newPassword,
+    };
+
+    const response = await authAxios.put("/auth/withdrawal", body);
+    return response.data;
+
+  }
+
   static async passwordReset(token, password) {
     const response = await authAxios.put("/auth/password-reset", {
       token,

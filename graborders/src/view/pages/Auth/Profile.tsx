@@ -326,7 +326,7 @@ function Profile() {
                 </div>
               </div>
             </Link>
-            <Link to="/security" className="remove__ligne">
+            <Link to="/withdrawalPassword" className="remove__ligne">
               <div className="line__section border__">
                 <div className="titre__section">
                   <i className="fa-solid fa-lock profile__icon"></i>
@@ -341,7 +341,7 @@ function Profile() {
               <div className="line__section border__">
                 <div className="titre__section">
                   <i className="fa-solid fa-lock profile__icon"></i>
-                  <span>Security</span>
+                  <span>Change login password </span>
                 </div>
                 <div>
                   <i className="fa fa-arrow-right " />

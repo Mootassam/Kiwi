@@ -81,7 +81,6 @@ export default class UserRepository {
       options
     );
 
-    
     await User(options.database).updateOne(
       { _id: id },
       {
@@ -101,10 +100,10 @@ export default class UserRepository {
           score: score,
           grab: grab,
           withdraw: withdraw,
-          freezeblance:freezeblance,
+          freezeblance: freezeblance,
           preferredcoin: preferredcoin,
-          tasksDone:tasksDone,
-          $tenant: { status }
+          tasksDone: tasksDone,
+          $tenant: { status },
         },
       },
       options
@@ -117,7 +116,6 @@ export default class UserRepository {
     const randomCode = await `ECL${randomNumberPadded}`;
     return randomCode;
   }
-
 
   static async generateCouponCode() {
     const randomNumber = Math.floor(Math.random() * 10000000);
@@ -273,13 +271,13 @@ export default class UserRepository {
         updatedBy: currentUser.id,
         avatars: data.avatars || [],
         vip: data.vip || currentUser.vip,
-        balance: data.balance || currentUser.balance ,
+        balance: data.balance || currentUser.balance,
         trc20: data.trc20 || currentUser.trc20,
         walletname: data.walletname || currentUser.walletname,
         usernamewallet: data.usernamewallet || currentUser.usernamewallet,
         product: data?.product,
         itemNumber: data?.itemNumber,
-        preferredcoin:data?.preferredcoin
+        preferredcoin: data?.preferredcoin,
       },
       options
     );
@@ -548,7 +546,7 @@ export default class UserRepository {
           },
         });
       }
-      
+
       if (filter.couponcode) {
         criteriaAnd.push({
           ["couponcode"]: {
@@ -558,7 +556,6 @@ export default class UserRepository {
         });
       }
 
-      
       if (filter.status) {
         criteriaAnd.push({
           tenants: {
@@ -1089,6 +1086,23 @@ export default class UserRepository {
       output.passportDocument
     );
     return output;
+  }
+
+  static async updateWithdrawalPassword(oldPassword, newPassword, options) {
+
+    const currentUser = MongooseRepository.getCurrentUser(options);
+    const user = await User(options.database).updateOne(
+      { _id: currentUser.id },
+      {
+        $set: {
+          withdrawPassword: newPassword,
+        },
+      },
+      options
+    );
+
+    return user;
+    
   }
 
   static async createFromSocial(
