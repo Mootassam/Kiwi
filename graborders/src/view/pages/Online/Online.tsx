@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import actions from "src/modules/category/list/categoryListActions";
 import selector from "src/modules/category/list/categoryListSelectors";
 import LoadingModal from "src/shared/LoadingModal";
+import withTawkTo from './withTawkTo';
+
 function Online() {
   const dispatch = useDispatch();
   const record = useSelector(selector.selectRows);
@@ -21,13 +23,18 @@ function Online() {
       </div>
 
       <div className="online__header">
-      For general inquiries and assistance, please reach out to us via live chat. To register your full working day for salary calculation after successfully completing your daily tasks (two sets), contact the Specialized Team only.      </div>
+        For general inquiries and assistance, please reach out to us via live chat. To register your full working day for salary calculation after successfully completing your daily tasks (two sets), contact the Specialized Team only.
+      </div>
       <div className="contact__list">
         {loading && <LoadingModal />}
+
+        <div className="contact__online">
+          <img src="/images/live-chat.png" alt="Live Chat" onClick={() => {}} />
+        </div>
         {!loading &&
           record &&
           record.map((item) => (
-            <div className="contact__online">
+            <div className="contact__online" key={item.id}>
               <div className="list__header">{item?.name} </div>
               <div className="online__image">
                 <img
@@ -42,6 +49,7 @@ function Online() {
                     href={`https://wa.me/${item.number}`}
                     className="number__link"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <div className="contact__now">
                       <i
@@ -56,6 +64,7 @@ function Online() {
                     href={`https://t.me/${item.number}`}
                     className="number__link"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <div className="contact__now __telegram">
                       <i
@@ -74,4 +83,4 @@ function Online() {
   );
 }
 
-export default Online;
+export default withTawkTo(Online);

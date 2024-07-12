@@ -84,7 +84,7 @@ function Signin() {
 
             <div className="auth__bottom">
               <button className="auth__button" disabled={loading} type="submit">
-                <i className="fa fa-arrow-right" style={{fontSize:34}}></i>
+               {!loading && <i className="fa fa-arrow-right" style={{fontSize:34}}></i> } 
                 <ButtonIcon loading={loading} />
               </button>
             

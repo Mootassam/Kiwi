@@ -16,6 +16,10 @@
   align-items: center;
   gap: 7px;
 }
+
+body.font-lato,html.font-lato {
+  display: none !important;
+}
 .app__switchtab {
   background-color: #203040;
   width: 100%;
@@ -263,7 +267,7 @@ td {
   width: 100% !important;
 }
 .advertise__header {
-  width: 100dvw;
+  /* width: 100dvw; */
   display: flex;
   overflow: hidden;
 }
@@ -2473,6 +2477,7 @@ button:disabled {
   height: 100%;
   position: fixed;
   z-index: 100;
+  left: 0;
 }
 
 .modal__time {
@@ -2486,6 +2491,7 @@ button:disabled {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  max-width: 550px;
   padding: 25px 20px;
   border-radius: 5px;
   background: linear-gradient(185deg, #076bff, #3486ff, #38a6fd);
