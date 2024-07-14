@@ -945,6 +945,7 @@ li {
   text-align: center;
   background-color: #fff;
   border-radius: 0 0 10px 0;
+  height: max-content;
 }
 
 .list__header {
@@ -1713,6 +1714,7 @@ button:disabled {
 
 .customer__image {
   border-radius: 0px !important;
+  height: 200px;
 }
 .header__left {
   display: flex;
@@ -2497,6 +2499,11 @@ button:disabled {
   background: linear-gradient(185deg, #076bff, #3486ff, #38a6fd);
 }
 
+
+
+
+
+
 .time__ {
   line-height: 1.5;
   position: relative;
@@ -2700,4 +2707,19 @@ button:disabled {
 
 input:focus {
   outline: none !important;
+}
+
+
+
+.__bleu{ 
+  background-color: #0056b3 !important;
+}
+
+#tawkchat-minified-container {
+  /* Example position */
+  position: relative !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  /* Additional styles */
+  z-index: 9999; /* Ensure it's above other content */
 }

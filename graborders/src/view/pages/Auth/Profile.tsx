@@ -10,7 +10,6 @@ import { useHistory } from "react-router-dom"; // Assuming you're using React Ro
 import actions from "src/modules/record/list/recordListActions";
 import selectors from "src/modules/record/list/recordListSelectors";
 import Message from "src/view/shared/message";
-import Withdraw from '../withdraw/Withdraw';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -23,7 +22,8 @@ function Profile() {
     };
     dispatch(actions.doCountDay());
     dispatch(actions.doFetch(values, values));
-  }, [dispatch]);
+  
+  })
 
   const doSignout = () => {
     dispatch(authActions.doSignout());
@@ -348,22 +348,21 @@ function Profile() {
                 </div>
               </div>
             </Link>
-              <div className="line__section ">
-                <div className="titre__section">
-                  <i className="fa fa-gift"></i>
-                  <span>
-                    Redemption :
-                    <span ref={couponCodeRef}> {currentUser?.couponcode} </span>
-                  </span>
-                </div>
-                <div>
-                  <i
-                    className="fa-regular fa-copy"
-                    onClick={() => copyToClipboardCoupon()}
-                  />
-                </div>
+            <div className="line__section ">
+              <div className="titre__section">
+                <i className="fa fa-gift"></i>
+                <span>
+                  Redemption :
+                  <span ref={couponCodeRef}> {currentUser?.couponcode} </span>
+                </span>
               </div>
-    
+              <div>
+                <i
+                  className="fa-regular fa-copy"
+                  onClick={() => copyToClipboardCoupon()}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
