@@ -116,6 +116,30 @@ const recordListActions = {
     }
   },
 
+
+  countProfitDay: () => async (dispatch) => {
+    try {
+      dispatch({
+        type: recordListActions.COUNTDAY_STARTED,
+      });
+      const response = await RecordService.countProfitDay();
+
+      dispatch({
+        type: recordListActions.COUNTDAY_SUCCESS,
+        payload: {
+          count: response,
+        },
+      });
+    } catch (error) {
+      Errors.handle(error);
+      dispatch({
+        type: recordListActions.COUNTDAY_ERROR,
+      });
+    }
+  },
+
+  
+
   doUpdateCombo: () => async (dispatch) => {
     try {
       dispatch({

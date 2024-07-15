@@ -278,7 +278,8 @@ class RecordRepository {
 
     return data;
   }
-  
+
+
   static async checkOrder(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
     const currentDate = this.getTimeZoneDate(); // Get current date

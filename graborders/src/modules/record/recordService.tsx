@@ -92,6 +92,18 @@ export default class RecordService {
 
 
 
+  static async countProfitDay () { 
+    const tenantId = AuthCurrentTenant.get();
+    const response = await authAxios.get(
+      `/tenant/${tenantId}/count/countProfitDay`, 
+    );
+    return response.data.total;
+  }
+
+  
+
+
+
 
   static async import(values, importHash) {
     const body = {

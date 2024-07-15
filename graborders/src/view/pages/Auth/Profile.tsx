@@ -23,7 +23,7 @@ function Profile() {
     dispatch(actions.doCountDay());
     dispatch(actions.doFetch(values, values));
   
-  })
+  },[])
 
   const doSignout = () => {
     dispatch(authActions.doSignout());

@@ -20,6 +20,8 @@ export default (app) => {
   app.get(`/tenant/:tenantId/records`, require("./recordListMobile").default);
   app.get(`/tenant/:tenantId/record/count`, require("./recordCount").default); 
   app.get(`/tenant/:tenantId/record/tasksdone/:id`, require("./recordTasksdone").default); 
+  app.get(`/tenant/:tenantId/count/countProfitDay`, require("./recordProfitDay").default); 
+
   app.get(`/tenant/:tenantId/count/recordperdays`, require("./recordperday").default); 
   app.get(`/tenant/:tenantId/record/:id`, require("./recordFind").default);
 };
