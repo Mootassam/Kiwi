@@ -267,21 +267,18 @@ class RecordRepository {
 
   static async tasksDone(currentUser, options) {
     const currentDate = this.getTimeZoneDate(); // Get current date
-    const record = await Records(options.database)
-      .find({
-        user: currentUser,
-        // Compare dates in the same format
-        datecreation: { $in: Dates.getTimeZoneDate() }, // Convert current date to Date object
-      })
-      .countDocuments();
+    const [record] = await User(options.database).find({
+      _id: currentUser,
+      // Compare dates in the same format
+    });
 
     const data = {
-      record: record,
+      record: record.tasksDone,
     };
 
     return data;
   }
-
+  
   static async checkOrder(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
     const currentDate = this.getTimeZoneDate(); // Get current date
