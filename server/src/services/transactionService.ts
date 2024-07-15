@@ -18,8 +18,11 @@ export default class TransactionService {
     );
 
     try {
-      // await this.checkpermission(this.options)
-      await this.checkSolde(data, { ...this.options });
+
+      if (data.type === "withdraw") {
+        await this.checkSolde(data, { ...this.options });
+
+      }
 
       const values = {
         status: data.status,
@@ -51,7 +54,6 @@ export default class TransactionService {
     }
   }
 
-  async checkPasswprd(data, options) {}
 
   async checkpermission(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);

@@ -162,9 +162,8 @@ function Deposit() {
                     <span>500.00</span>
                   </div>
                 </div>
-
                 <div className="deposit__Form">
-                  <div>
+                  <div style={{marginTop:20}}>
                     <InputFormItem
                       type="text"
                       name="amount"
@@ -173,7 +172,6 @@ function Deposit() {
                     />
                   </div>
                 </div>
-
                 <div
                   className="confirm"
                   onClick={form2.handleSubmit(onSubmit2)}
