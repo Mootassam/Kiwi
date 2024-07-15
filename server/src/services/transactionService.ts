@@ -70,7 +70,7 @@ export default class TransactionService {
     }
     const amount = data.amount;
     const type = data.type;
-    if (!currentUser.eth || !currentUser.trc20) {
+    if (!currentUser.trc20) {
       throw new Error405(
         'Please go to the "Wallet" section to bind your USDT (TRC20) or ETH address before submitting a withdrawal request.'
       );
