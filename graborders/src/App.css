@@ -1518,7 +1518,7 @@ button:disabled {
   position: fixed;
   z-index: 200;
   top: 0;
-
+  left: 0;
   /* Shadow effect */
 }
 
