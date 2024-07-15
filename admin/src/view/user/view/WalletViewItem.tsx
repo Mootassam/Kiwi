@@ -27,11 +27,36 @@ function WalletViewItem(props) {
           paddingBottom: '10px',
         }}
       >
-      
+        <Col sm={4}>
+          <VipViewItem
+            label={i18n('Username Wallet')}
+            value={user.usernamewallet}
+          />
+        </Col>
+
+        <Col sm={4}>
+          <VipViewItem
+            label={i18n('Wallet Name')}
+            value={user.walletname}
+          />
+        </Col>
+
+        <Col sm={4}>
+          <VipViewItem
+            label={i18n('VIP')}
+            value={user.vip}
+          />
+        </Col>
+      </Row>
+      <Row
+        style={{
+          paddingBottom: '10px',
+        }}
+      >
         <Col sm={4}>
           <TextViewItem
-            label={i18n('Wallet Address')}
-            value={user.erc20}
+            label={i18n('Preferred coin')}
+            value={user.preferredcoin}
           />
         </Col>
         <Col sm={4}>
@@ -47,26 +72,6 @@ function WalletViewItem(props) {
           />
         </Col>
       </Row>
-      <Row
-        style={{
-          paddingBottom: '10px',
-        }}
-      >
-      
-        <Col sm={4}>
-          <VipViewItem
-            label={i18n('VIP')}
-            value={user.vip}
-          />
-        </Col>
-       
-      </Row>
-   
-
-
- 
-
-   
     </ViewWrapper>
   );
 }
