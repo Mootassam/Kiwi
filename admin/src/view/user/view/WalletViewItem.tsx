@@ -28,14 +28,14 @@ function WalletViewItem(props) {
         }}
       >
         <Col sm={4}>
-          <VipViewItem
+          <TextViewItem
             label={i18n('Username Wallet')}
             value={user.usernamewallet}
           />
         </Col>
 
         <Col sm={4}>
-          <VipViewItem
+          <TextViewItem
             label={i18n('Wallet Name')}
             value={user.walletname}
           />
