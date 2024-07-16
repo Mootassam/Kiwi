@@ -18,6 +18,7 @@ class RecordRepository {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     const currentUser = MongooseRepository.getCurrentUser(options);
+    
     await this.checkOrder(options);
     await this.calculeGrap(data, options);
 
@@ -177,7 +178,7 @@ class RecordRepository {
     if (
       currentUser &&
       currentUser.product &&
-      currentUser.product[0].id &&
+      currentUser.product[0]?.id &&
       currentUser.tasksDone === mergeDataPosition
     ) {
       // Subtract total amount including commission from current user's balance
