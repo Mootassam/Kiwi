@@ -113,23 +113,20 @@ function UserTable() {
                     </div>
                   )}
                 </TableColumnHeader>
-                <TableColumnHeader
-                  className="text-center"
-                  label={i18n('user.fields.avatars')}
-                ></TableColumnHeader>
+            
                 <TableColumnHeader
                   onSort={doChangeSort}
                   hasRows={hasRows}
                   sorter={sorter}
                   name={'email'}
-                  label={i18n('user.fields.email')}
+                  label={i18n('user.fields.username')}
                 />
                 <TableColumnHeader
                   onSort={doChangeSort}
                   hasRows={hasRows}
                   sorter={sorter}
                   name={'fullName'}
-                  label={i18n('user.fields.fullName')}
+                  label={i18n('user.fields.phoneNumber')}
                 />
                 <TableColumnHeader
                   onSort={doChangeSort}
@@ -209,18 +206,9 @@ function UserTable() {
                         </label>
                       </div>
                     </th>
-                    <td className="text-center">
-                      <Avatar
-                        src={
-                          row.avatars && row.avatars.length
-                            ? row.avatars[0].downloadUrl
-                            : undefined
-                        }
-                        alt="avatar"
-                      />
-                    </td>
+             
                     <td>{row.email}</td>
-                    <td>{row.fullName}</td>
+                    <td>{row.phoneNumber}</td>
                     <td>{row.invitationcode}</td>
                     <td>{row.refcode}</td>
                     <td>{row.couponcode}</td>

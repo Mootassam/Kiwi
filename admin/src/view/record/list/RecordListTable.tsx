@@ -106,7 +106,7 @@ function CouponsListTable(props) {
   return (
     <TableWrapper>
       <div className="table-responsive">
-        <table className="table table-striped     mt-2">
+        <table className="table table-striped mt-2">
           <thead className="thead">
             <tr>
               <TableColumnHeader className="th-checkbox">
