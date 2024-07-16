@@ -187,7 +187,7 @@ function Profile() {
                 <div className="user__title">{currentUser?.fullName}</div>
                 <div className="small__invitation">
                   <div className="small__inviation__left">
-                    InvitationCode :
+                    Invitation Code :
                     <span ref={referenceCodeRef}> {currentUser?.refcode}</span>
                   </div>
                 </div>
