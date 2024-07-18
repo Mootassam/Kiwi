@@ -15,6 +15,7 @@ import Avatar from 'src/view/shared/Avatar';
 import TableWrapper from 'src/view/shared/styles/TableWrapper';
 import recordListActions from 'src/modules/record/list/recordListActions';
 import selectorTaskdone from 'src/modules/record/list/recordListSelectors';
+import UserPrentcode from 'src/view/user/view/UserPrentcode';
 
 function UserTable() {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function UserTable() {
   const selectedKeys = useSelector(
     selectors.selectSelectedKeys,
   );
-  const [showTask, setShowTask] = useState(false)
+  const [showTask, setShowTask] = useState(false);
   const hasRows = useSelector(selectors.selectHasRows);
   const sorter = useSelector(selectors.selectSorter);
   const isAllSelected = useSelector(
@@ -80,7 +81,7 @@ function UserTable() {
   };
 
   const showThecurrentRecord = async (id, totaltask?) => {
-    setShowTask(true)
+    setShowTask(true);
     await dispatch(recordListActions.doTasksDone(id));
     setTotalTasks(totaltask);
   };
@@ -113,7 +114,7 @@ function UserTable() {
                     </div>
                   )}
                 </TableColumnHeader>
-            
+
                 <TableColumnHeader
                   onSort={doChangeSort}
                   hasRows={hasRows}
@@ -143,7 +144,7 @@ function UserTable() {
                   name={'refcode'}
                   label={i18n('user.fields.refcode')}
                 />
-        <TableColumnHeader
+                <TableColumnHeader
                   onSort={doChangeSort}
                   hasRows={hasRows}
                   sorter={sorter}
@@ -206,10 +207,14 @@ function UserTable() {
                         </label>
                       </div>
                     </th>
-             
+
                     <td>{row.email}</td>
                     <td>{row.phoneNumber}</td>
-                    <td>{row.invitationcode}</td>
+                    <td>
+                      <UserPrentcode
+                        code={row.invitationcode}
+                      />
+                    </td>
                     <td>{row.refcode}</td>
                     <td>{row.couponcode}</td>
 
@@ -289,7 +294,13 @@ function UserTable() {
       )}
       {!LoadingTasksDone && showTask && (
         <div className="modal__socore">
-          <div className='score__close' onClick={() => setShowTask(false)}> <i className='fa fa-close font' /></div>
+          <div
+            className="score__close"
+            onClick={() => setShowTask(false)}
+          >
+            {' '}
+            <i className="fa fa-close font" />
+          </div>
           <div className="modal__contentscore">
             <p className="text__score">
               {tasksdone} / {totalTask}

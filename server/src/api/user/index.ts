@@ -23,6 +23,14 @@ export default (app) => {
     `/tenant/:tenantId/user`,
     require('./userList').default,
   );
+
+
+  app.get(
+    `/tenant/:tenantId/userfindparent/:id`,
+    require('./userFindParent').default,
+  );
+
+
   app.get(
     `/tenant/:tenantId/user/autocomplete`,
     require('./userAutocomplete').default,

@@ -110,6 +110,15 @@ export default class UserService {
     return response.data;
   }
 
+
+  static async findParent(id) {
+    const tenantId = AuthCurrentTenant.get();
+    const response = await authAxios.get(
+      `/tenant/${tenantId}/userfindparent/${id}`,
+    );
+    return response.data;
+  }
+
   static async fetchUsers(filter, orderBy, limit, offset) {
     const params = {
       filter,

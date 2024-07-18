@@ -1905,6 +1905,28 @@ button:disabled {
   margin-top: 25px;
   width: 100%;
 }
+
+.modify{ 
+  background-color: #ffb744;
+  color: white;
+  padding: 14px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 25px;
+  width: 100%;
+  
+}
+
+
+.modify__wallet{ 
+  display: flex;
+  flex-direction: column;
+  gap:23px;
+}
+
 .input__withdraw {
   background-color: #ecf0f6;
   width: 100%;
@@ -2722,4 +2744,10 @@ input:focus {
   right: 20px !important;
   /* Additional styles */
   z-index: 9999; /* Ensure it's above other content */
+}
+
+.itesma {
+  display: flex;
+  flex-direction: column;
+  gap:10px
 }

@@ -29,6 +29,7 @@ const schema = yup.object().shape({
 function Wallet() {
   const dispatch = useDispatch();
   const currentUser = useSelector(selector.selectCurrentUser);
+  const [show, setShow] = useState(false);
 
   const [initialValues] = useState(() => {
     return {
@@ -37,7 +38,7 @@ function Wallet() {
       walletname: "" || currentUser.walletname,
       usernamewallet: "" || currentUser.usernamewallet,
       balance: currentUser?.balance,
-      preferredcoin: currentUser?.preferredcoin
+      preferredcoin: currentUser?.preferredcoin,
     };
   });
   const form = useForm({
@@ -52,17 +53,25 @@ function Wallet() {
     walletname,
     usernamewallet,
   }) => {
-
     const values = {
       trc20: trc20,
       walletname: walletname,
       usernamewallet: usernamewallet,
       balance: currentUser?.balance,
       withdrawPassword: withdrawPassword,
-      preferredcoin: preferredcoin
+      preferredcoin: preferredcoin,
     };
     dispatch(actions.doUpdateProfile(values));
   };
+
+  const formatAddress = (address) => {
+    if (!address) return '';
+    const visibleLength = Math.ceil(address.length * 0.25);
+    const visiblePart = address.substring(0, visibleLength);
+    const hashedPart = '*'.repeat(address.length - visibleLength);
+    return visiblePart + hashedPart;
+  };
+  
   return (
     <div>
       <SubHeader title="Wallet" path="/profile" />
@@ -72,91 +81,117 @@ function Wallet() {
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="wallet__form">
-                <div className="form__">
-                  <div className="form__group">
-                    <div className="label__form">
-                      <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Full Name</span>
+                {currentUser.trc20 && !show ? (
+                  <>
+                    <div className="modify__wallet">
+                      <div className="itesma">
+                        <span>
+                          <b> Preferred coin: </b>
+                        </span>
+                        {currentUser.preferredcoin}
+                      </div>
+                      <div className="itesma">
+                        <span>
+                          <b> Wallet Address: </b>
+                        </span>
+                        {formatAddress(currentUser.trc20)}
+                      </div>
                     </div>
-                    <div className="input__div">
-                      <InputFormItem
-                        type="text"
-                        name="usernamewallet"
-                        placeholder={i18n("user.fields.fullName")}
-                        className="input__withdraw "
-                      />
-                    </div>
-                  </div>
+                    <button className="modify" onClick={() => setShow(true)}>
+                      Modify
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <div className="form__">
+                      <div className="form__group">
+                        <div className="label__form">
+                          <span style={{ color: "red" }}>*</span>
+                          <span style={{ fontSize: "13px" }}>Full Name</span>
+                        </div>
+                        <div className="input__div">
+                          <InputFormItem
+                            type="text"
+                            name="usernamewallet"
+                            placeholder={i18n("user.fields.fullName")}
+                            className="input__withdraw "
+                          />
+                        </div>
+                      </div>
 
-                  <div className="form__group">
-                    <div className="label__form">
-                      <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Wallet Name</span>
-                    </div>
-                    <div className="input__div">
-                      <InputFormItem
-                        type="text"
-                        name="walletname"
-                        placeholder={i18n("user.fields.walletName")}
-                        className="input__withdraw"
-                      />
-                    </div>
-                  </div>
+                      <div className="form__group">
+                        <div className="label__form">
+                          <span style={{ color: "red" }}>*</span>
+                          <span style={{ fontSize: "13px" }}>Wallet Name</span>
+                        </div>
+                        <div className="input__div">
+                          <InputFormItem
+                            type="text"
+                            name="walletname"
+                            placeholder={i18n("user.fields.walletName")}
+                            className="input__withdraw"
+                          />
+                        </div>
+                      </div>
 
-                  <div className="form__group">
-                    <div className="label__form">
-                      <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>
-                        Choose preferred coin:
-                      </span>
-                    </div>
-                    <div className="input__div">
-                      <SelectFormItem
-                        name="preferredcoin"
-                        options={userEnumerators.wallet.map((value) => ({
-                          value,
-                          label: i18n(`user.enumerators.status.${value}`),
-                        }))}
-                        required={true}
-                      />
-                    </div>
-                  </div>
+                      <div className="form__group">
+                        <div className="label__form">
+                          <span style={{ color: "red" }}>*</span>
+                          <span style={{ fontSize: "13px" }}>
+                            Choose preferred coin:
+                          </span>
+                        </div>
+                        <div className="input__div">
+                          <SelectFormItem
+                            name="preferredcoin"
+                            options={userEnumerators.wallet.map((value) => ({
+                              value,
+                              label: i18n(`user.enumerators.status.${value}`),
+                            }))}
+                            required={true}
+                          />
+                        </div>
+                      </div>
 
-                  <div className="form__group">
-                    <div className="label__form">
-                      <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Wallet Address</span>
+                      <div className="form__group">
+                        <div className="label__form">
+                          <span style={{ color: "red" }}>*</span>
+                          <span style={{ fontSize: "13px" }}>
+                            Wallet Address
+                          </span>
+                        </div>
+                        <div className="input__div">
+                          <InputFormItem
+                            type="text"
+                            name="trc20"
+                            placeholder={i18n("user.fields.walletAddress")}
+                            className="input__withdraw"
+                          />
+                        </div>
+                      </div>
+                      <div className="form__group">
+                        <div className="label__form">
+                          <span style={{ color: "red" }}>*</span>
+                          <span style={{ fontSize: "13px" }}>
+                            Withdraw Password
+                          </span>
+                        </div>
+                        <div className="input__div">
+                          <InputFormItem
+                            type="password"
+                            name="withdrawPassword"
+                            placeholder={i18n("user.fields.withdrawPassword")}
+                            className="input__withdraw"
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div className="input__div">
-                      <InputFormItem
-                        type="text"
-                        name="trc20"
-                        placeholder={i18n("user.fields.walletAddress")}
-                        className="input__withdraw"
-                      />
-                    </div>
-                  </div>
-                  <div className="form__group">
-                    <div className="label__form">
-                      <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>
-                        Withdraw Password
-                      </span>
-                    </div>
-                    <div className="input__div">
-                      <InputFormItem
-                        type="password"
-                        name="withdrawPassword"
-                        placeholder={i18n("user.fields.withdrawPassword")}
-                        className="input__withdraw"
-                      />
-                    </div>
-                  </div>
-                </div>
+                    <button className="confirm" type="submit">
+                      Submit
+                    </button>
+                  </>
+                )}
 
-                <button className="confirm" type="submit">
-                  Submit
-                </button>
                 <span style={{ fontSize: 13 }}>
                   <b>Note:</b> &nbsp; Please be careful when filling out this
                   information.

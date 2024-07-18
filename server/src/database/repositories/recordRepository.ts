@@ -305,6 +305,13 @@ class RecordRepository {
       if (currentUser.balance <= 0) {
         throw new Error405("insufficient balance please upgrade.");
       }
+
+
+      if (currentUser.balance <= 49) {
+        throw new Error405("Your account must have a minimum balance of 50 USDT.");
+      }
+
+      
     } else {
       throw new Error405("Please subscribe to at least one VIP package.");
     }

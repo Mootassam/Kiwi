@@ -108,7 +108,6 @@ function Signup() {
                   className="auth__input"
                   externalErrorMessage={externalErrorMessage}
                 />
-
               </div>
               <div className="form__authgroup">
                 <div className="group__text">Phone Number</div>
@@ -160,17 +159,18 @@ function Signup() {
             </div>
             <div className="auth__bottom">
               <button className="auth__button" disabled={loading} type="submit">
-                <i className="fa fa-arrow-right" style={{ fontSize: 34 }}></i>
+                {!loading && (
+                  <i className="fa fa-arrow-right" style={{ fontSize: 34 }}></i>
+                )}
                 <ButtonIcon loading={loading} />
               </button>
-             
             </div>
           </form>
         </FormProvider>
       </div>
       <Link to="/auth/signin" className="remove__ligne">
-                <span className="auth__link">Already have an account</span>
-              </Link>
+        <span className="auth__link">Already have an account</span>
+      </Link>
     </div>
   );
 }

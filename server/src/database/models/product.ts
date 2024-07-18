@@ -15,7 +15,7 @@ export default (database) => {
         type: String,
       },
       amount: {
-        type: String,
+        type: Number,
       },
       commission: {
         type: String,

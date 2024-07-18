@@ -616,6 +616,13 @@ export default class UserRepository {
     return { rows, count };
   }
 
+  static async FindParentUserName(data, options) {
+    const [invitedUser] = await User(options.database).find({
+      refcode: data,
+    });
+    return invitedUser?.email;
+  }
+
   static async filterIdInTenant(id, options: IRepositoryOptions) {
     return lodash.get(await this.filterIdsInTenant([id], options), "[0]", null);
   }
@@ -1089,7 +1096,6 @@ export default class UserRepository {
   }
 
   static async updateWithdrawalPassword(oldPassword, newPassword, options) {
-
     const currentUser = MongooseRepository.getCurrentUser(options);
     const user = await User(options.database).updateOne(
       { _id: currentUser.id },
@@ -1102,7 +1108,6 @@ export default class UserRepository {
     );
 
     return user;
-    
   }
 
   static async createFromSocial(

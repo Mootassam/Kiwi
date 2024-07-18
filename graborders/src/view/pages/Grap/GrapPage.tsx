@@ -39,7 +39,6 @@ const Grappage = () => {
   const [lodingRoll, setLoadingRoll] = useState(false);
   const selectCountRecord = useSelector(recordSelector.selectCountRecord);
 
-
   const error = useSelector(recordSelector.selectError);
 
   const refreshItems = useCallback(async () => {
@@ -179,7 +178,6 @@ const Grappage = () => {
     await refreshItems();
   };
 
-
   return (
     <>
       <div className="app__grappage">
@@ -220,19 +218,13 @@ const Grappage = () => {
                 <img src={randomImage3} alt="" />
               </div>
               <div className="">
-                {currentUser.grab ? (
-                  <button
-                    className={`grap ${lodingRoll ? "__disabled" : ""}`}
-                    onClick={() => rollAll()}
-                    disabled={lodingRoll}
-                  >
-                    <span className="product__start">Start</span>
-                  </button>
-                ) : (
-                  <button className={`grap __disabled`} disabled={true}>
-                    <span className="product__start">Start</span>
-                  </button>
-                )}
+                <button
+                  className={`grap ${lodingRoll ? "__disabled" : ""}`}
+                  onClick={() => rollAll()}
+                  disabled={lodingRoll}
+                >
+                  <span className="product__start">Start</span>
+                </button>
               </div>
               <div className="">
                 <img src={randomImage4} alt="" />
