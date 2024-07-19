@@ -139,7 +139,7 @@ export default class UserRepository {
           withdrawPassword: data.withdrawPassword,
           invitationcode: data.invitationcode,
           refcode: await this.generateRandomCode(),
-          couponcode: await this.generateCouponCode(),
+          couponcode: await this.generateRandomCode(),
         },
       ],
       options
