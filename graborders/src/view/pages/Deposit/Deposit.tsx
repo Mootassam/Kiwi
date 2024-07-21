@@ -210,13 +210,13 @@ function Deposit() {
                         <div className="usdt__">
                           <div>TRC20 Address:</div>
                           <div className="usdt__copy">
-                            <div ref={referenceCodeRef}>{record[0]?.trc20}</div>
-                            <div>
+                            <div ref={referenceCodeRef} className="full__address">{record[0]?.trc20}</div>
+                        
                               <i
                                 className="fa fa-copy"
                                 onClick={() => copyToClipboard()}
                               ></i>
-                            </div>
+                          
                           </div>
                         </div>
                       ) : (

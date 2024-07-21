@@ -28,7 +28,7 @@ const schema = yup.object().shape({
       required: true,
     },
   ),
-  amount: yupFormSchemas.integer(
+  amount: yupFormSchemas.decimal(
     i18n('entities.product.fields.amount'),
     {
       required: true,
