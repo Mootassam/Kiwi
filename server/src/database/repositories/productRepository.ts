@@ -259,7 +259,6 @@ class ProductRepository {
 
     // If the above condition fails, fetch products from the database
 
-    console.log(currentUser.balance );
     
     let products = await Product(options.database)
       .find({

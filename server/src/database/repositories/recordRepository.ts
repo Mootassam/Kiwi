@@ -92,7 +92,7 @@ class RecordRepository {
     }
   }
   static async updateCombo(options: IRepositoryOptions) {
-    await this.checkOrder(options);
+    await this.checkOrderCombo(options);
 
     try {
       const currentUser = MongooseRepository.getCurrentUser(options);
@@ -281,6 +281,8 @@ class RecordRepository {
   }
 
 
+
+
   static async checkOrder(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
     const currentDate = this.getTimeZoneDate(); // Get current date
@@ -309,17 +311,46 @@ class RecordRepository {
         throw new Error405("insufficient balance please upgrade.");
       }
 
-      if (
-        currentUser &&
-        currentUser.product &&
-        currentUser.product.length > 0 &&
-        currentUser.product[0].id &&
-        currentUser.tasksDone === mergeDataPosition
-      ) {
-        return;
-      } else if (currentUser.balance <= 49) {
+    if (currentUser.balance <= 49) {
         throw new Error405("Your account must have a minimum balance of 50 USDT.");
       }
+
+      
+    } else {
+      throw new Error405("Please subscribe to at least one VIP package.");
+    }
+  }
+  static async checkOrderCombo(options) {
+    const currentUser = MongooseRepository.getCurrentUser(options);
+    const currentDate = this.getTimeZoneDate(); // Get current date
+
+    const record = await Records(options.database)
+      .find({
+        user: currentUser.id,
+        // Compare dates in the same format
+        datecreation: { $in: Dates.getTimeZoneDate() }, // Convert current date to Date object
+      })
+      .countDocuments();
+
+    const dailyOrder = currentUser.vip.dailyorder;
+    const mergeDataPosition = currentUser.itemNumber;
+
+    if (currentUser && currentUser.vip && currentUser.vip.id) {
+      if (currentUser.tasksDone >= dailyOrder) {
+        throw new Error405(
+          "This is your limit. Please contact customer support for more tasks"
+        );
+      }
+
+      
+
+      if (currentUser.balance <= 0) {
+        throw new Error405("insufficient balance please upgrade.");
+      }
+
+    // if (currentUser.balance <= 49) {
+    //     throw new Error405("Your account must have a minimum balance of 50 USDT.");
+    //   }
 
       
     } else {
