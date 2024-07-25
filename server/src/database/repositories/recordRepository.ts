@@ -294,6 +294,7 @@ class RecordRepository {
       .countDocuments();
 
     const dailyOrder = currentUser.vip.dailyorder;
+    const mergeDataPosition = currentUser.itemNumber;
 
     if (currentUser && currentUser.vip && currentUser.vip.id) {
       if (currentUser.tasksDone >= dailyOrder) {
@@ -302,12 +303,21 @@ class RecordRepository {
         );
       }
 
+      
+
       if (currentUser.balance <= 0) {
         throw new Error405("insufficient balance please upgrade.");
       }
 
-
-      if (currentUser.balance <= 49) {
+      if (
+        currentUser &&
+        currentUser.product &&
+        currentUser.product.length > 0 &&
+        currentUser.product[0].id &&
+        currentUser.tasksDone === mergeDataPosition
+      ) {
+        return;
+      } else if (currentUser.balance <= 49) {
         throw new Error405("Your account must have a minimum balance of 50 USDT.");
       }
 
