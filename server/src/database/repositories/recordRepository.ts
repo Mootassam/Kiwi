@@ -195,23 +195,23 @@ class RecordRepository {
       total = currentUserBalance - comboprice;
       frozen = currentUserBalance.toFixed(2);
     } else {
-      const [invitedUser] = await User(options.database).find({
-        refcode: currentUser.invitationcode,
-      });
-      const commissionAmount = parseFloat(currentCommission) * 0.25;
+      // const [invitedUser] = await User(options.database).find({
+      //   refcode: currentUser.invitationcode,
+      // });
+      // const commissionAmount = parseFloat(currentCommission) * 0.25;
 
-      // Update invited user's balance
+      // // Update invited user's balance
 
-      if (invitedUser) {
-        await User(options.database).updateOne(
-          { _id: invitedUser._id },
-          {
-            $set: {
-              balance: parseFloat(invitedUser.balance) + commissionAmount,
-            },
-          }
-        );
-      }
+      // if (invitedUser) {
+      //   await User(options.database).updateOne(
+      //     { _id: invitedUser._id },
+      //     {
+      //       $set: {
+      //         balance: parseFloat(invitedUser.balance) + commissionAmount,
+      //       },
+      //     }
+      //   );
+      // }
 
       // Add total amount including commission to current user's balance
       total =
