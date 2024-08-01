@@ -260,12 +260,17 @@ class ProductRepository {
     // If the above condition fails, fetch products from the database
 
     
+    let lowerBound = currentUser.balance / 2;
+
     let products = await Product(options.database)
       .find({
         vip: currentVip,
         combo: false,
         $expr: {
-          $lte: [ { $toDouble: "$amount" }, currentUser.balance ]
+          $and: [
+            { $gte: [{ $toDouble: "$amount" }, lowerBound] },
+            { $lte: [{ $toDouble: "$amount" }, currentUser.balance] }
+          ]
         }
       })
       .populate("vip");
