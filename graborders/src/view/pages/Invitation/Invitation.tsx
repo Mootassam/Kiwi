@@ -7,7 +7,7 @@ function Events() {
       <SubHeader title="Events" path="/" />
       <div className="detaill__company" style={{ whiteSpace: "pre-line" }}>
         <img src="/images/events/1.jpg" />
-        <img src="/images/events/2.jpg" />
+        {/* <img src="/images/events/2.jpg" /> */}
 
       </div>
     </div>

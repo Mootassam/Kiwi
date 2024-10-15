@@ -37,7 +37,6 @@ const Grappage = () => {
   // const numberRecord = useSelector(recordSelector.selectCount);
   const [showModal, setShowModal] = useState(false);
   const [lodingRoll, setLoadingRoll] = useState(false);
-  const selectCountRecord = useSelector(recordSelector.selectCountRecord);
 
   const error = useSelector(recordSelector.selectError);
 
